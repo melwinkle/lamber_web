@@ -36,3 +36,116 @@
     transform: rotate(360deg);
   }
 }
+
+
+
+.login{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10% 0% 0% 0%;
+}
+
+
+.login .card .card-body .card-title{
+  text-align: center;
+}
+
+
+.dashboard{
+  color:black;
+  margin: 8% 0% 0% 5%;
+}
+
+
+.dashboard .d-flex.sum{
+  text-align: center;
+ 
+}
+.dashboard .d-flex.sum span{
+  font-size:20pt;
+ 
+}
+.dashboard .d-flex.live{
+  margin: 5% 0% 0% 0%;
+}
+
+
+.dashboard .d-flex.single{
+  margin: 5% 0% 0% 0%;
+  text-align: center;
+}
+
+
+.dashboard .d-flex.profile{
+  margin: 5% 0% 0% 0%;
+  text-align: center;
+}
+
+.dashboard .d-flex.single .card .card-body .card-text{
+  justify-content: center;
+  align-items: center;
+  margin: 2% 0% 0% 0%;
+}
+
+.dashboard .d-flex.profile .card .card-body .card-text{
+  justify-content: center;
+  align-items: center;
+  margin: 2% 0% 0% 0%;
+}
+.dashboard .d-flex.single .card .card-body .card-text .singleh{
+  font-weight:bold;
+
+}
+
+.dashboard .d-flex.profile .card .card-body .card-text .singleh{
+  font-weight:bold;
+
+}
+.dashboard .d-flex.single .card .card-body .card-text .singlet{
+  font-weight:normal;
+
+}
+
+.dashboard .d-flex.profile .card .card-body .card-text .singlet{
+  font-weight:normal;
+
+}
+
+.dashboard .d-flex.single .card .card-body .card-text.snap img{
+  float:left;
+  height:30rem;
+
+}
+.add{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2% 0% -20% 20%;
+}
+
+.dashboard .new{
+  margin-top:2%;
+}
+.dashboard .new .newcard{
+  width:30rem;
+  border:1px solid blue;
+}
+
+
+.dashboard .new .newcard .accept{
+  width:10rem;
+  background-color:green;
+  border:none;
+  color:white;
+  border-radius:2px;
+}
+
+.dashboard .new .newcard .decline{
+  width:10rem;
+  background-color:crimson;
+  border:none;
+  color:white;
+  border-radius:2px;
+  margin-left:5%;
+}
