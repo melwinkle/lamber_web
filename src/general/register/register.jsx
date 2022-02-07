@@ -7,7 +7,7 @@ import {
   MDBBtn,
   MDBCard, MDBCardBody, MDBCardTitle,
 } from 'mdb-react-ui-kit';
-import "../../src/App.css";
+import "../../App.css";
 import { getDatabase, ref, set } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
@@ -80,19 +80,6 @@ export default function Register() {
       console.log(error.message)
   }
 
-
-    
-        
-    
-      
-      
-     
-
-     
-
-
-  
-   
   }
 
 

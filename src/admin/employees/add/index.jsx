@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
@@ -7,18 +7,80 @@ import Form from "react-bootstrap/Form";
 import "../../../App.css";
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn,MDBTable, MDBTableHead, MDBTableBody, MDBBtnGroup,MDBInput,MDBSelect} from 'mdb-react-ui-kit';
 import {FaEye} from "react-icons/fa";
-
+import { getDatabase, ref, onValue,child, get,set } from "firebase/database";
+import { getAuth,signOut,createUserWithEmailAndPassword  } from "firebase/auth";
+import {FiLogOut} from "react-icons/fi";
 
 
 export default function AddEmployee() {
+
+
+  const name=[];
+  const db = getDatabase();
+  const auth = getAuth();
+const user = auth.currentUser;
+const [hospital, setName] = useState("");
+
+
+  
+useEffect(()=>{
+  auth.onAuthStateChanged(user => {
+        if (user) {
+          const dbRef = ref(getDatabase());
+          get(child(dbRef, `hospital/${user.uid}`)).then((snapshot) => {
+            
+            if (snapshot.exists()) {
+              console.log(snapshot.val())
+              name.push(snapshot.val())
+           
+              setName(name[0].Hospital_name);
+  
+            } else {
+              console.log("No data available");
+            }
+          }).catch((error) => {
+            console.error(error);
+          });
+
+      //     const starCountRef = ref(db, `hospital/${user.uid}`);
+      //     onValue(starCountRef, (snapshot) => {
+      //         const data = snapshot.val();
+      //         if(data!==null){
+      //             setData({...snapshot.val()})
+      //             console.log(data);
+  
+      //         }else{
+      //             setData({});
+      //         }
+          
+  
+      //         return () =>{
+      //             setData({});
+      //         };
+  
+      // })
+           
+        }
+    })
+          
+  },[]);
+
+    
+function logout(){
+  signOut(auth).then(() => {
+    window.location.href='/';
+  }).catch((error) => {
+    // An error happened.
+  })
+}
 
     const [fname, setFirst] = useState("");
     const [lname, setLast] = useState("");
     const [phone, setPhone] = useState("");
     const [email, setMail] = useState("");
     const [role, setRole] = useState("");
-    const [username, setUser] = useState("");
-    const [passwords, setPass] = useState("");
+    // const [username, setUser] = useState("");
+    const [password, setPass] = useState("");
     const onChangeHandler = (fieldName, value)=>{
         if(fieldName === "email"){
         setMail(value);
@@ -32,9 +94,9 @@ export default function AddEmployee() {
         else if(fieldName==="phone"){
         setPhone(value);
         }
-        else if(fieldName==="username"){
-        setUser(value);
-        }
+        // else if(fieldName==="username"){
+        // setUser(value);
+        // }
         else if(fieldName==="role"){
             setRole(value);
             }
@@ -42,23 +104,49 @@ export default function AddEmployee() {
             setPass(value);
         }
   }
+
+
   const handleSubmit = (e)=>{
     e.preventDefault();
-    if(fname.trim()==="" ||lname.trim()==="" ||phone.trim()==="" ||email.trim()==="" || role.trim() ===""|| username.trim() ===""|| passwords.trim() ===""){
-      alert("All Fields Required");
-    }
-    else{
-      alert("Registration Succesful");
-      setFirst("");
-      setLast("");
-      setPhone("");
-      setUser("");
-      setRole("");
-      setMail("");
-      setPass("");
-      window.location.href="/admin/employees";
-    }
-}
+   
+    try {
+      createUserWithEmailAndPassword(auth, email, password)
+      .then((userCredential) => {
+        // Signed in 
+        const user = userCredential.user;
+
+        set(ref(db, 'users/ems/' + user.uid), {
+          Email: user.email,
+          First_name: fname,
+          Last_name: lname,
+          Number:phone,
+          userrole:2,
+          Online:0,
+          uid: user.uid,
+          Status: "Active",
+          Hospital:hospital,
+          Role:role
+        }).then(()=>{
+          alert("Employee Added successfully");
+          window.location.href="/admin/employees"
+        });
+       
+        // ...
+      })
+      .catch((error) => {
+        const errorMessage = error.message;
+
+        console.log(errorMessage)
+        // ..
+      });
+    
+
+  } catch (error) {
+      console.log(error.message)
+  }
+
+  }
+
     
   return (
         <div class='dashboard'>
@@ -73,7 +161,8 @@ export default function AddEmployee() {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                   <Navbar.Text>
-                     <a href="/admin/profile">North Legon Hospital</a>
+                     <a href="/admin/profile">{hospital}</a>
+                     <a  class="logout" onClick={()=>logout()}> <FiLogOut/></a>
                   </Navbar.Text>
                 </Navbar.Collapse>
               </Container>
@@ -98,9 +187,8 @@ export default function AddEmployee() {
                                         <option>User Role</option>
                                         <option value="EMS">EMS Personnel</option>
                                         <option value="Driver">Driver</option>
-                                        <option value="Administrator">Administrator</option>
                                     </Form.Select>
-                                    <MDBInput className='mb-4' id='form4' type='text' label="Username"  onChange={(e)=>{ onChangeHandler("username",e.target.value)}}/>
+                                    {/* <MDBInput className='mb-4' id='form4' type='text' label="Username"  onChange={(e)=>{ onChangeHandler("username",e.target.value)}}/> */}
 
 
                                     <MDBInput className='mb-4' type='password' id='form2Example2' label='Password' onChange={(e)=>{ onChangeHandler("password",e.target.value)}}/>

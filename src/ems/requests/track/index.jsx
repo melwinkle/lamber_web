@@ -12,7 +12,7 @@ import {FiLogOut} from "react-icons/fi";
 import { useParams } from 'react-router-dom';
 
 
-export default function EMSSingleRequest() {
+export default function EMSTrackRequest() {
   const[data,setData] = useState({});
   const name=[];
   const db = getDatabase();

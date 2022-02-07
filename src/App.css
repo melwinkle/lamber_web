@@ -57,7 +57,9 @@
   margin: 8% 0% 0% 5%;
 }
 
-
+.dashboard .top .online label{
+  margin-left:-2%;
+}
 .dashboard .d-flex.sum{
   text-align: center;
  
@@ -82,6 +84,15 @@
   text-align: center;
 }
 
+.dashboard .d-flex.live #rating {
+  text-align: center;
+}
+.dashboard .d-flex.live #rating svg{
+  width: 4rem;
+  height: 4rem;
+  color:orange;
+}
+.dashboard .d-flex.live #rating
 .dashboard .d-flex.single .card .card-body .card-text{
   justify-content: center;
   align-items: center;
@@ -127,13 +138,13 @@
 .dashboard .new{
   margin-top:2%;
 }
-.dashboard .new .newcard{
+.dashboard .new .card.newcard{
   width:30rem;
   border:1px solid blue;
 }
 
 
-.dashboard .new .newcard .accept{
+.dashboard .new  .newcard .accept{
   width:10rem;
   background-color:green;
   border:none;
@@ -148,4 +159,40 @@
   color:white;
   border-radius:2px;
   margin-left:5%;
+}
+
+
+.interface{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20% 0% 0% 0%;
+}
+.interface button{
+  border:none;
+  color:white;
+  
+
+}
+
+.interface .ems{
+  
+  width:20rem;
+  height:5rem;
+  background-color:rgb(26, 99, 26);
+  border:none;
+  color:white;
+  border-radius:5px;
+  text-align: center;
+}
+
+.interface .admin{
+  width:20rem;
+  height:5rem;
+  background-color:rgb(102, 38, 51);
+  border:none;
+  color:white;
+  border-radius:2px;
+  margin-left:5%;
+  text-align: center;
 }

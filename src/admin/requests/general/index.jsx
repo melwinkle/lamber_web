@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
@@ -6,10 +6,113 @@ import Nav from "react-bootstrap/Nav";
 import "../../../App.css";
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn,MDBTable, MDBTableHead, MDBTableBody, MDBBtnGroup } from 'mdb-react-ui-kit';
 import {FaEye} from "react-icons/fa";
-
+import { getDatabase, ref, onValue,child, get } from "firebase/database";
+import { getAuth,signOut  } from "firebase/auth";
+import {FiLogOut} from "react-icons/fi";
 
 export default function GeneralRequests() {
+  const[datas,setData] = useState({});
+  const name=[];
+  const db = getDatabase();
+  const auth = getAuth();
+const user = auth.currentUser;
+const [hospital, setName] = useState("");
+
+
+  
+useEffect(()=>{
+  auth.onAuthStateChanged(user => {
+        if (user) {
+          const dbRef = ref(getDatabase());
+          get(child(dbRef, `hospital/${user.uid}`)).then((snapshot) => {
+            
+            if (snapshot.exists()) {
+              console.log(snapshot.val())
+              name.push(snapshot.val())
+              setData({datas:name});
+              setName(name[0].Hospital_name);
+  
+            } else {
+              console.log("No data available");
+            }
+          }).catch((error) => {
+            console.error(error);
+          });
+          request_count(user.uid);
+      //     const starCountRef = ref(db, `hospital/${user.uid}`);
+      //     onValue(starCountRef, (snapshot) => {
+      //         const data = snapshot.val();
+      //         if(data!==null){
+      //             setData({...snapshot.val()})
+      //             console.log(data);
+  
+      //         }else{
+      //             setData({});
+      //         }
+          
+  
+      //         return () =>{
+      //             setData({});
+      //         };
+  
+      // })
+           
+        }
+    })
+          
+  },[]);
+
     
+function logout(){
+  signOut(auth).then(() => {
+    window.location.href='/';
+  }).catch((error) => {
+    // An error happened.
+  })
+}
+function request_count(uid){
+  const dbRef = ref(getDatabase());
+        get(child(dbRef, `requests`)).then((snapshot) => {
+          
+          if (snapshot.exists()) {
+            const data=snapshot.val();
+            let fileToShow='';
+            console.log(snapshot.val())
+            for(var key in data){
+              if((data[key].Hospital_uid==uid )&& (data[key].Status=="Completed")){
+                fileToShow += "<tr>" +
+                "<td scope='row'>" + data[key].Request_DateTime +'</td>' +
+                "<td>" + data[key].Personnel +"</td>" +
+                "<td>" + data[key].Vehicle_Registration +"</td>" +
+                "<td>" + data[key].Customer_Name +"</td>" +
+                "<td>" + data[key].Destination +"</td>" +
+                "<td>" + data[key].Request_Type +"</td>" +
+                "<td>" + data[key].Reason +"</td>" +
+                "<td>" + data[key].Status +"</td>" +
+                "<td>"+"<a class='btn btn-warning' href='/admin/requests/single/"+key+"'>"+"View"+"</button>"+"</td>" +
+           
+                "</tr>";
+
+              }
+
+              if(fileToShow==""){
+                document.getElementById("req").innerHTML="<tr><td colspan='9'>No data available</td></tr>"
+              }else{
+                document.getElementById("req").innerHTML=fileToShow;
+              }
+           
+            
+            }
+
+          
+          } else {
+            console.log("No data available");
+          }
+        }).catch((error) => {
+          console.error(error);
+        });
+
+}
   return (
         <div class='dashboard'>
             <Navbar fixed="top" >
@@ -23,7 +126,8 @@ export default function GeneralRequests() {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                   <Navbar.Text>
-                     <a href="#profile">North Legon Hospital</a>
+                     <a href="#profile">{hospital}</a>
+                     <a  class="logout" onClick={()=>logout()}> <FiLogOut/></a>
                   </Navbar.Text>
                 </Navbar.Collapse>
               </Container>
@@ -59,18 +163,9 @@ export default function GeneralRequests() {
                                     
                                       </tr>
                                     </MDBTableHead>
-                                    <MDBTableBody>
-                                      <tr>
-                                        <th scope='row'>124</th>
-                                        <td>19th September 2021 08:10:03 AM</td>
-                                        <td>Patricia Komla</td>
-                                        <td>GN 1232-19</td>
-                                        <td>Lisa Akpalu</td>
-                                        <td>1 Berekuso University Avenue</td>
-                                        <td>Specific Request</td>
-                                        <td>Accident</td>
-                                        <td><MDBBtn><FaEye/></MDBBtn></td>
-                                      </tr>
+                                    <MDBTableBody id="req">
+                              
+                                      
                                       
                                     </MDBTableBody>
                               </MDBTable>

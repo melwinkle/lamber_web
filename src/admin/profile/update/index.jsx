@@ -1,15 +1,116 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
-import "../../App.css";
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn, MDBBtnGroup} from 'mdb-react-ui-kit';
+import "../../../App.css";
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn, MDBBtnGroup,MDBInput} from 'mdb-react-ui-kit';
 import {FaDownload} from "react-icons/fa";
+import { getDatabase, ref, onValue,child, get,update } from "firebase/database";
+import { getAuth,signOut  } from "firebase/auth";
+import {FiLogOut} from "react-icons/fi";
+
+export default function AProfileUpdate() {
+  const[datas,setData] = useState({});
+  const name=[];
+  const db = getDatabase();
+  const auth = getAuth();
+const user = auth.currentUser;
+const [hospital, setName] = useState("");
+const [date, setDate] = useState("");
+const [location, setLocation] = useState("");
+const [number, setNumber] = useState("");
+const [status, setStatus] = useState("");
+const [email, setEmail] = useState("");
+
+const onChangeHandler = (fieldName, value)=>{
+ 
+  
+  if(fieldName==="name"){
+    setName(value);
+  }
+  else if(fieldName==="location"){
+    setLocation(value);
+  }
+  else if(fieldName==="phone"){
+    setNumber(value);
+  }
+
+}
 
 
-export default function ProfileUpdate() {
+
+useEffect(()=>{
+  auth.onAuthStateChanged(user => {
+        if (user) {
+          const dbRef = ref(getDatabase());
+          get(child(dbRef, `hospital/${user.uid}`)).then((snapshot) => {
+            
+            if (snapshot.exists()) {
+              console.log(snapshot.val())
+              name.push(snapshot.val())
+              setData({datas:name});
+              setName(name[0].Hospital_name);
+              setDate(name[0].Hospital_date);
+              setLocation(name[0].Hospital_location);
+              setNumber(name[0].Hospital_number);
+              setStatus(name[0].Status);
+              setEmail(name[0].Hospital_email);
+            } else {
+              console.log("No data available");
+            }
+          }).catch((error) => {
+            console.error(error);
+          });
+         
+      //     const starCountRef = ref(db, `hospital/${user.uid}`);
+      //     onValue(starCountRef, (snapshot) => {
+      //         const data = snapshot.val();
+      //         if(data!==null){
+      //             setData({...snapshot.val()})
+      //             console.log(data);
+  
+      //         }else{
+      //             setData({});
+      //         }
+          
+  
+      //         return () =>{
+      //             setData({});
+      //         };
+  
+      // })
+           
+        }
+    })
+          
+  },[]);
+
     
+function logout(){
+  signOut(auth).then(() => {
+    window.location.href='/';
+  }).catch((error) => {
+    // An error happened.
+  })
+}
+
+const handleSubmit = (e)=>{
+  e.preventDefault();
+
+  const db = getDatabase();
+  const dbRef = ref(db, `hospital/${user.uid}`);
+  update(dbRef,{
+  Hospital_name: hospital,
+  Hospital_number: number,
+  Hospital_location:location
+}).then(() => {
+  console.log("Data updated");
+}).catch((e) => {
+  console.log(e);
+})
+
+}
   return (
         <div class='dashboard'>
             <Navbar fixed="top" >
@@ -23,7 +124,8 @@ export default function ProfileUpdate() {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                   <Navbar.Text>
-                     <a href="/admin/profile">North Legon Hospital</a>
+                     <a href="/admin/profile">{hospital}</a>
+                     <a  class="logout" onClick={()=>logout()}> <FiLogOut/></a>
                   </Navbar.Text>
                 </Navbar.Collapse>
               </Container>
@@ -34,21 +136,32 @@ export default function ProfileUpdate() {
               <MDBCol>
                     <MDBCard >
                         <MDBCardBody>
-                            <MDBCardTitle>NORTH LEGON HOSPITAL
-                                <h6>ACTIVE</h6>
+                            <MDBCardTitle>
+                              {hospital}
+                                <h6>{status.toUpperCase()}</h6>
                               
                             </MDBCardTitle>
                             <MDBCardText>
-                                
-                            <MDBCol><span class="singleh">Registration Date:<span class="singlet">Lisa Akpalu</span></span></MDBCol>
-                            <MDBCol><span class="singleh">Location:<span class="singlet">+2332460545185</span></span></MDBCol>
-                            <MDBCol><span class="singleh">Email:<span class="singlet">1 Berekuso University Avenue</span></span></MDBCol>
-                            <MDBCol><span class="singleh">Phone Number:<span class="singlet">12:00 PM</span></span></MDBCol>
-                            </MDBCardText>
+                        
 
-                            <MDBBtn href='#' active>Update</MDBBtn>
-                                
+                            <form onSubmit={(e)=>{handleSubmit(e)}}>
+                            <MDBInput className='mb-4'  id='form1' type='text' label="Company Name" value={hospital}onChange={(e)=>{ onChangeHandler("name",e.target.value)}} />
+                            <MDBInput className='mb-4' id='form2' type='text' label="Company Location"  value={location}onChange={(e)=>{ onChangeHandler("location",e.target.value)}}/>
+                            <MDBInput  className='mb-4' label='Phone number input' id='typePhone' type='tel' value={number}onChange={(e)=>{ onChangeHandler("phone",e.target.value)}} />
+                            <MDBInput className='mb-4' type='email' id='form2Example1' label='Email address' value={email} readonly/>
+                           
+
+
                             
+                            
+
+                            <MDBBtn type='submit' className='mb-4' block>
+                                Update
+                            </MDBBtn>
+
+                          
+                        </form>
+                        </MDBCardText>
                             
                         </MDBCardBody>
                       </MDBCard>

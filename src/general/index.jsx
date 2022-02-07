@@ -14,7 +14,7 @@ import {
 import { getAuth,signInWithEmailAndPassword } from "firebase/auth";
 
 // import{auth} from './index';
-const EHome=()=>{
+const AHome=()=>{
     const[data,setData] = useState({});
     const db = getDatabase();
 //     useEffect(()=>{
@@ -97,11 +97,11 @@ const handleSubmit = (e)=>{
 
 function getUserData(uid) {
     const dbRef = ref(getDatabase());
-get(child(dbRef, `users/ems/${uid}`)).then((snapshot) => {
+get(child(dbRef, `hospital/${uid}`)).then((snapshot) => {
   if (snapshot.exists()) {
     setData({...snapshot.val()})
     console.log(snapshot.val());
-    window.location.href="/ems/dashboard";
+    window.location.href="admin";
 
   } else {
     console.log("No data available");
@@ -113,7 +113,14 @@ get(child(dbRef, `users/ems/${uid}`)).then((snapshot) => {
 }
 
 
-
+// function relocate(){
+//     Object.keys(data).map((id,index)=>(
+        
+//         console.log("log"+data[id].userrole  ) 
+     
+//  )
+//  )
+// }
 
 
 
@@ -132,7 +139,7 @@ const [itemsArray, setItemsArray] = useState([]);
         </div>
         <MDBCard style={{ maxWidth: '40rem' }}>
                 <MDBCardBody>
-                        <MDBCardTitle>LAMBER EMS</MDBCardTitle>
+                        <MDBCardTitle>LAMBER MANAGEMENT</MDBCardTitle>
                         <form onSubmit={(e)=>{handleSubmit(e)}}>
                             <MDBInput className='mb-4' type='email' id='form2Example1' label='Email address'  onChange={(e)=>{ onChangeHandler("email",e.target.value)}}/>
                            
@@ -153,7 +160,12 @@ const [itemsArray, setItemsArray] = useState([]);
                                 Sign in
                             </MDBBtn>
 
+                            <div className='text-center'>
+                                <p>
+                                Not a member? <a href='/general/register'>Register</a>
+                                </p>
                             
+                            </div>
                         </form>
 
                 </MDBCardBody>
@@ -162,4 +174,4 @@ const [itemsArray, setItemsArray] = useState([]);
     )
 }
 
-export default EHome;
+export default AHome;

@@ -3,80 +3,86 @@ import Navbar from "react-bootstrap/Navbar";
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
-import "../../src/App.css";
-import Form from "react-bootstrap/Form";
+import "../../App.css";
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn,MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
 import {BiHealth} from "react-icons/bi";
 import {FiLogOut} from "react-icons/fi";
-import { getDatabase, ref, onValue,child, get ,update} from "firebase/database";
+import Form from 'react-bootstrap/Form';
+import { getDatabase, ref, onValue,child, get,update } from "firebase/database";
 import { getAuth,signOut  } from "firebase/auth";
+import {FaStar} from "react-icons/fa";
 
-export default function Dashboard() {
-  
-  const[datas,setData] = useState({});
+export default function EMSDashboard() {
+
+  const[data,setData] = useState({});
   const name=[];
-  const requests=[];
-  const incoming=[];
-  const employee=[];
   const db = getDatabase();
   const auth = getAuth();
 const user = auth.currentUser;
+const [full, setName] = useState("");
 const [check, setCheck] = useState(false);
-const [hospital, setName] = useState("");
 const [req_count, setCount] = useState("");
 const [inc_count, setInc] = useState("");
-const [emp_count, setEmp] = useState("");
-  
+const [can_count, setCnc] = useState(0);
+
+
 useEffect(()=>{
   auth.onAuthStateChanged(user => {
         if (user) {
-          const dbRef = ref(getDatabase());
-          get(child(dbRef, `hospital/${user.uid}`)).then((snapshot) => {
+          // const dbRef = ref(getDatabase());
+          // get(child(dbRef, `users/ems/${user.uid}`)).then((snapshot) => {
             
-            if (snapshot.exists()) {
-              console.log(snapshot.val())
-              name.push(snapshot.val())
-              setData({datas:name});
-              setName(name[0].Hospital_name);
-              if(name[0].Online==1){
-                setCheck(true);
-              }else{
-                setCheck(false);
-              }
-            } else {
-              console.log("No data available");
-            }
-          }).catch((error) => {
-            console.error(error);
-          });
+          //   if (snapshot.exists()) {
+          //     console.log(snapshot.val())
+          //     name.push(snapshot.val())
+          //     setData({...snapshot.val()})
+          //       console.log(name)
+              
+          //   } else {
+          //     console.log("No data available");
+          //   }
+          // }).catch((error) => {
+          //   console.error(error);
+          // });
 
-          request_count(user.uid);
-          employee_count(user.uid);
-
-      //     const starCountRef = ref(db, `hospital/${user.uid}`);
-      //     onValue(starCountRef, (snapshot) => {
-      //         const data = snapshot.val();
-      //         if(data!==null){
-      //             setData({...snapshot.val()})
-      //             console.log(data);
-  
-      //         }else{
-      //             setData({});
-      //         }
+      
+          const starCountRef = ref(db, `users/ems/${user.uid}`);
+                  onValue(starCountRef, (snapshot) => {
+                      const datas = snapshot.val();
+                      if(datas!==null){
+                          setData({...snapshot.val()})
+                          console.log(datas);
+                          name.push(snapshot.val());
+                          setName(name[0].First_name+" "+name[0].Last_name);
+                          if(name[0].Online==1){
+                            setCheck(true);
+                          }else{
+                            setCheck(false);
+                          }
+                          
+                      }else{
+                          setData({});
+                      }
+                  
           
-  
-      //         return () =>{
-      //             setData({});
-      //         };
-  
-      // })
-           
+                      return () =>{
+                  
+                          setData({});
+                      };
+          
+              });
+
+
+              request_count(user.uid);
+
+
+
         }
     })
           
   },[]);
 
-
+    
   function request_count(uid){
     const dbRef = ref(getDatabase());
           get(child(dbRef, `requests`)).then((snapshot) => {
@@ -84,13 +90,14 @@ useEffect(()=>{
             if (snapshot.exists()) {
               const data=snapshot.val();
               let fileToShow='';
+              let file='';
               console.log(snapshot.val())
               for(var key in data){
-                if(data[key].Hospital_uid==uid){
+                if(data[key].Personnel_uid==uid){
                   setCount(data.length);
                   fileToShow += "<tr>" +
-                  "<td scope='row'>" + data[key].Personnel +"</td>" +
-                  '<td >' + data[key].Destination +'</td>' +
+                  "<td scope='row'>" + data[key].Destination +"</td>" +
+                  '<td >' + data[key].Customer_Number +'</td>' +
                   "<td>" + data[key].Status +"</td>" +
 
                   "</tr>";
@@ -104,7 +111,20 @@ useEffect(()=>{
                 if(data[keys].Status=="Ongoing"){
                   setInc(data.length);
                 }
+                if(data[keys].Status=="Cancelled"){
+                  setCnc(data.length);
+                }
                 
+                }
+
+
+                for(var kes in data){
+                    file=0;
+                    file+=data[kes].Rating;
+                    const avg=file/(data.length);
+                    console.log("abf",avg);
+
+                  document.getElementById("rat").innerHTML=avg+"/5";
                 }
             } else {
               console.log("No data available");
@@ -115,44 +135,8 @@ useEffect(()=>{
 
   }
 
-  function employee_count(uid){
-    const dbRef = ref(getDatabase());
-          get(child(dbRef, `users/ems/`)).then((snapshot) => {
-            
-            if (snapshot.exists()) {
-              const data=snapshot.val();
-              let fileToShow='';
-             
-              for(var key in data){
-                
-              
-                if(data[key].Hospital_uid==uid){
-                 employee.push(data);
-                  fileToShow += "<tr>" +
-                  "<td scope='row'>" + data[key].First_name +" "+data[key].Last_name+"</td>" +
-                  '<td >' + data[key].Role +'</td>' +
-                  "<td>" + data[key].Status +"</td>" +
 
-                  "</tr>";
-          
-                  
-
-                }
-                setEmp(employee.length)
-              document.getElementById("emp").innerHTML=fileToShow;
-              
-              }
-
-             
-            } else {
-              console.log("No data available");
-            }
-          }).catch((error) => {
-            console.error(error);
-          });
-
-  }
-    
+  
 function logout(){
   signOut(auth).then(() => {
     window.location.href='/';
@@ -166,7 +150,7 @@ const checkonline = (e) => {
   // const dbRef = ref(getDatabase());
   // // const userRef=dbRef('users/ems/' + user.uid);
   const db = getDatabase();
-  const dbRef = ref(db, `hospital/${user.uid}`);
+  const dbRef = ref(db, `users/ems/${user.uid}`);
 
   if (checked) {
     update(dbRef,{
@@ -191,15 +175,15 @@ const checkonline = (e) => {
         <div class='dashboard'>
             <Navbar fixed="top" >
               <Container>
-                <Navbar.Brand href="#admin">Lamber Admin</Navbar.Brand>
-                <Nav className="me-auto" variant="tabs" defaultActiveKey="/admin">
-                    <Nav.Link href="/admin">Home</Nav.Link>
-                    <Nav.Link href="/admin/requests">Requests</Nav.Link>
-                    <Nav.Link href="/admin/employees">Employees</Nav.Link>
+                <Navbar.Brand href="#admin">Lamber EMS</Navbar.Brand>
+                <Nav className="me-auto" variant="tabs" defaultActiveKey="/ems/dashboard">
+                    <Nav.Link href="/ems/dashboard">Home</Nav.Link>
+                    <Nav.Link href="/ems/requests">Requests</Nav.Link>
                   </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
-                <Form class="online">
+                  <Navbar.Text>
+                  <Form class="online">
                       <Form.Check 
                         type="switch"
                         id="custom-switch"
@@ -208,18 +192,20 @@ const checkonline = (e) => {
                         onClick={(e)=>checkonline(e)}
                       />
                     </Form>
-                  <Navbar.Text>
-                
-                  <a href="/admin/profile">{hospital}</a>  
-                     <a  class="logout" onClick={()=>logout()}> <FiLogOut/></a>
+                   
+                   
+                    
+                    
+                     
+                   
+                     <a href="/ems/profile">{full}</a>
+                     <a onClick={()=>logout()} class="logout"> <FiLogOut/></a>
                    
                   </Navbar.Text>
                   
                 </Navbar.Collapse>
               </Container>
             </Navbar>
-
-          
 
             <div class="d-flex sum align-items-start mb-3" >
                 <MDBCol>
@@ -246,9 +232,9 @@ const checkonline = (e) => {
                   <MDBCard style={{ maxWidth: '22rem' }}>
                         <MDBCardBody>
                             <MDBCardText>
-                              <span>{emp_count}<BiHealth/></span>
+                            <span>{can_count}<BiHealth/></span>
                             </MDBCardText>
-                            <MDBCardTitle>TOTAL EMPLOYEES</MDBCardTitle>
+                            <MDBCardTitle>CANCELLED REQUESTS</MDBCardTitle>
                         </MDBCardBody>
                       </MDBCard>
                   </MDBCol>
@@ -263,18 +249,18 @@ const checkonline = (e) => {
                                 <MDBTable>
                                     <MDBTableHead>
                                       <tr>
-                                        <th scope='col'>Personnel</th>
                                         <th scope='col'>Destination</th>
+                                        <th scope='col'>Phone Number</th>
                                         <th scope='col'>Status</th>
                                     
                                       </tr>
                                     </MDBTableHead>
                                     <MDBTableBody id="req">
-                                     
+                                    
                                     </MDBTableBody>
                               </MDBTable>
                             </MDBCardText>
-                            <MDBBtn href="/admin/requests">View All</MDBBtn>
+                            <MDBBtn href="/ems/requests">View All</MDBBtn>
                         </MDBCardBody>
                       </MDBCard>
                   </MDBCol>   
@@ -282,23 +268,11 @@ const checkonline = (e) => {
                   <MDBCol>
                     <MDBCard style={{ maxWidth: '35rem' }}>
                         <MDBCardBody>
-                            <MDBCardTitle>EMPLOYEE COUNT</MDBCardTitle>
-                            <MDBCardText>
-                                <MDBTable>
-                                    <MDBTableHead>
-                                      <tr>
-                                        <th scope='col'>Personnel</th>
-                                        <th scope='col'>Role</th>
-                                        <th scope='col'>Status</th>
-                                    
-                                      </tr>
-                                    </MDBTableHead>
-                                    <MDBTableBody id="emp">
-                                      
-                                    </MDBTableBody>
-                              </MDBTable>
+                            <MDBCardTitle>AVERAGE RATING</MDBCardTitle>
+                            <MDBCardText id="rating">
+                                <FaStar></FaStar>
+                                <h4 id="rat"></h4>
                             </MDBCardText>
-                            <MDBBtn  href="/admin/employees">View All</MDBBtn>
                         </MDBCardBody>
                       </MDBCard>
                   </MDBCol>   
