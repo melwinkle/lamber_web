@@ -80,7 +80,7 @@ useEffect(()=>{
               let fileToShow='';
               console.log(snapshot.val())
               for(var key in data){
-                if((data[key].Personnel_uid==uid )&& (data[key].Status=="Ongoing")){
+                if((data[key].Personnel_uid==uid )&& (data[key].Status!=="Completed")){
                   fileToShow += "<tr>" +
                   "<td scope='row'>" + data[key].Request_DateTime +'</td>' +
                   "<td>" + data[key].Vehicle_Registration +"</td>" +

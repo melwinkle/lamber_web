@@ -86,10 +86,10 @@ useEffect(()=>{
               "<MDBCol><span class='singleh'>Customer Name:<span class='singlet'>"+snapshot.val().Customer_Name+"</span></span></MDBCol><br>"+
               "<MDBCol><span class='singleh'>Customer Number:<span class='singlet'>"+snapshot.val().Customer_Number+"</span></span></MDBCol><br>"+
               "<MDBCol><span class='singleh'>Pick-Up Time:<span class='singlet'>"+snapshot.val().Pick_Up_Time+"</span></span></MDBCol><br>"+
-              "<MDBCol><span class='singleh'>Trip Length:<span class='singlet'>"+snapshot.val().Trip+"</span></span></MDBCol><br>"+
               "<MDBCol><span class='singleh'>Reason:<span class='singlet'>"+snapshot.val().Reason+"</span></span></MDBCol><br>"+
               "<MDBCol><span class='singleh'>Request Time:<span class='singlet'>"+snapshot.val().Request_DateTime+"</span></span></MDBCol><br>"+
               "<MDBCol><span class='singleh'>Request Approved:<span class='singlet'>"+snapshot.val().Request_Approved+"</span></span></MDBCol><br>"+
+              "<MDBCol><span class='singleh'>Trip Ended:<span class='singlet'>"+snapshot.val().Arrival+"</span></span></MDBCol><br>"+
               "<MDBCol><span class='singleh'>Rating:<span class='singlet'>"+snapshot.val().Rating+"/5</span></span></MDBCol><br>"+
               "<MDBCol><span class='singleh'>Audio:<span class='singlet'>"+snapshot.val().Audio+"</span></span></MDBCol><br>"+
              " </MDBCardText>"+

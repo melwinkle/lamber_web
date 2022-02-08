@@ -125,7 +125,13 @@
 
 .dashboard .d-flex.single .card .card-body .card-text.snap img{
   float:left;
-  height:30rem;
+
+}
+
+.dashboard .d-flex.single .card .card-body  .info{
+  float:right;
+  margin-top:-30%;
+  text-align:center;
 
 }
 .add{

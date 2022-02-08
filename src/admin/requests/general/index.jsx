@@ -150,8 +150,7 @@ function request_count(uid){
                             <MDBCardText>
                                 <MDBTable>
                                     <MDBTableHead>
-                                      <tr>
-                                        <th scope='col'>Request #</th>
+                                    <tr>
                                         <th scope='col'>DateTime</th>
                                         <th scope='col'>Personnel</th>
                                         <th scope='col'>Vehicle Registration</th>
@@ -159,6 +158,7 @@ function request_count(uid){
                                         <th scope='col'>Destination</th>
                                         <th scope='col'>Request Type</th>
                                         <th scope='col'>Reason</th>
+                                        <th scope='col'>Status</th>
                                         <th scope='col'>Actions</th>
                                     
                                       </tr>

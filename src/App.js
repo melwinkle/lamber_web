@@ -14,6 +14,7 @@ import GeneralRequests from "./admin/requests/general";
 import SingleRequest from "./admin/requests/single";
 import AcceptRequests from "./admin/requests/accept";
 import DeclineRequests from "./admin/requests/decline";
+import ATrackRequest from "./admin/requests/track";
 import AllEmployees from "./admin/employees";
 import EmployeePost from "./admin/employees/single";
 import AddEmployee from "./admin/employees/add";
@@ -41,6 +42,7 @@ function App(){
         <Route path="/admin/requests/" element={<IncomingRequests />} />
         <Route path="/admin/requests/general/" element={<GeneralRequests />} />
         <Route path="/admin/requests/single/:id" element={<SingleRequest />} />
+        <Route path="/admin/requests/track/:id" element={<ATrackRequest />} />
         <Route path="/admin/requests/accept/:id" element={<AcceptRequests />} />
         <Route path="/admin/requests/decline/:id" element={<DeclineRequests />} />
         <Route path="/admin/employees/" element={<AllEmployees />} />

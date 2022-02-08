@@ -85,8 +85,7 @@ useEffect(()=>{
                   "<td>" + data[key].Customer_Name +"</td>" +
                   "<td>" + data[key].Destination +"</td>" +
                   "<td>" + data[key].Request_Type +"</td>" +
-                  "<td>" + data[key].Reason +"</td>" +
-                  "<td>" + data[key].Status +"</td>" +
+                  "<td>" + data[key].Reason +"</td>"+
                   "<td>"+"<a class='btn btn-warning' href='/ems/requests/single/"+key+"'>"+"View"+"</a>"+"</td>" +
              
                   "</tr>";
