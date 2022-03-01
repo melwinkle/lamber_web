@@ -26,6 +26,8 @@ export default function DeclineRequests() {
     const [lname, setLastN] = useState("");
     const [hospital, setName] = useState("");
     const [destination, setDest] = useState("");
+    const [location, setloc] = useState("");
+    const [hid, setID] = useState("");
     // const [username, setUser] = useState("");
    
 
@@ -40,6 +42,8 @@ export default function DeclineRequests() {
                   console.log(snapshot.val())
                   name.push(snapshot.val())
                   setName(name[0].Hospital_name);
+                  setloc(name[0].Hospital_location);
+                  setID(user.uid);
       
                 } else {
                   console.log("No data available");
@@ -72,7 +76,10 @@ export default function DeclineRequests() {
           }).then((result) => {
             if (result.isConfirmed) {
                 update(dbRef,{
-                    Status:"Cancelled"
+                    Status:"Cancelled",
+                    Hospital_name:hospital,
+                    Hospital_location:location,
+                    Hospital_uid:hid,
                     }).then(() => {
                     console.log("Cancelled");
                     window.location.href="/admin/requests";

@@ -23,6 +23,8 @@ export default function AcceptRequests() {
     const [fname, setLast] = useState("");
     const [lname, setLastN] = useState("");
     const [hospital, setName] = useState("");
+    const [location, setloc] = useState("");
+    const [hid, setID] = useState("");
     const [destination, setDest] = useState("");
     // const [username, setUser] = useState("");
    
@@ -45,7 +47,9 @@ export default function AcceptRequests() {
                   console.log(snapshot.val())
                   name.push(snapshot.val())
                   setName(name[0].Hospital_name);
-      
+                  setloc(name[0].Hospital_location);
+                  setID(user.uid);
+    
                 } else {
                   console.log("No data available");
                 }
@@ -78,6 +82,9 @@ export default function AcceptRequests() {
           Request_approved:Date().toLocaleString(),
           Status:"Ongoing",
           Vehicle_Registration:"GN 1932-19",
+          Hospital_name:hospital,
+          Hospital_location:location,
+          Hospital_uid:hid,
         }).then(() => {
           console.log("Assigned");
           alert("EMS ASSIGNED")

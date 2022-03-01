@@ -87,7 +87,8 @@ useEffect(()=>{
               console.log(snapshot.val())
               for(var key in data){
                 if(data[key].Hospital_uid==uid){
-                  setCount(data.length);
+                  requests.push(data);
+              
                   fileToShow += "<tr>" +
                   "<td scope='row'>" + data[key].Personnel +"</td>" +
                   '<td >' + data[key].Destination +'</td>' +
@@ -96,14 +97,17 @@ useEffect(()=>{
                   "</tr>";
 
                 }
+                setCount(requests.length);
               document.getElementById("req").innerHTML=fileToShow;
               
               }
 
               for(var keys in data){
-                if(data[keys].Status=="Ongoing"){
-                  setInc(data.length);
+                if(data[keys].Status=="Pending"){
+                  incoming.push(data);
+                 
                 }
+                setInc(incoming.length);
                 
                 }
             } else {
