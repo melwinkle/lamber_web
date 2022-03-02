@@ -22,8 +22,12 @@ const user = auth.currentUser;
 const [hospital, setName] = useState("");
 
 
+
   
 useEffect(()=>{
+
+
+  
   auth.onAuthStateChanged(user => {
         if (user) {
           const dbRef = ref(getDatabase());
@@ -108,8 +112,12 @@ function logout(){
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-   
+    
+ 
     try {
+      
+      
+  
       createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 

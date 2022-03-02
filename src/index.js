@@ -11,6 +11,16 @@ import {getAuth} from 'firebase/auth';
 
 
 
+// var admin = require("firebase-admin");
+
+// var serviceAccount = require("../src/admin/adminsdk.json");
+
+// admin.initializeApp({
+//   credential: admin.credential.cert(serviceAccount),
+//   databaseURL: "https://lamber-capstone-default-rtdb.firebaseio.com"
+// });
+
+
 
 
 const firebaseConfig = {

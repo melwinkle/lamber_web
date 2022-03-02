@@ -98,7 +98,7 @@ function request_count(uid){
                 "<td>" + data[key].Request_Type +"</td>" +
                 "<td>" + data[key].Reason +"</td>" +
                 "<td>" + data[key].Status +"</td>" +
-                "<td>"+"<a class='btn btn-warning' href='/admin/requests/single/"+key+"'>"+"View"+"</a>"+"</td>" +
+                "<td>"+"<a class='btn btn-warning' href='/admin/requests/single/"+key+"'>"+"View"+"</a>"+"<a class='btn btn-success' href='/admin/requests/track/"+key+"'>"+"Track"+"</a>"+"</td>" +
            
                 "</tr>";
 
@@ -143,7 +143,7 @@ function request_new(uid){
             const data=snapshot.val();
             let fileToShow='';
             for(var key in data){
-              if((data[key].Status=="Pending") && (data[key].Hospital_uid==uid)){
+              if((data[key].Status=="Pending") && (data[key].Hospital_uid==uid)&& (data[key].Request_Type=="Specific")){
                 
               fileToShow += 
                 "<div class='col'>"+
@@ -168,6 +168,27 @@ function request_new(uid){
                ;
                
                
+              }else if((data[key].Status=="Pending") &&  (data[key].Request_Type=="General")){
+                fileToShow += 
+                "<div class='col'>"+
+               " <div class='card newcard'>"+
+                  "<div class='card-body' >"+
+                  "<div class='card-title'>"+
+                  "NEW REQUEST!"+
+                "</div>"+
+                "<div class='card-text'>"+
+                  "Incoming request #"+ key +" from "+ data[key].Destination+
+               " </div>"+
+                
+                  
+                 " <a class='accept' href=/admin/requests/accept/"+key+">ACCEPT</a>"+
+                 
+                    
+
+                  "</div>"+
+               " </div>"+
+             " </div>"
+               ;
               }
               if(fileToShow==""){
                    document.getElementById("new").innerHTML="No new requests";
