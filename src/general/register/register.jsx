@@ -57,7 +57,8 @@ export default function Register() {
           userrole:1,
           Hospital_date:Date().toLocaleString(),
           uid: user.uid,
-          email: user.email
+          email: user.email,
+          Vehicle:0,
         }).then(()=>{
           auth.onAuthStateChanged(user => {
                 if (user) {

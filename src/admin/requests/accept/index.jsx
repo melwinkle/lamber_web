@@ -85,6 +85,7 @@ export default function AcceptRequests() {
           Hospital_name:hospital,
           Hospital_location:location,
           Hospital_uid:hid,
+          Vehicle:1,
         }).then(() => {
           console.log("Assigned");
           alert("EMS ASSIGNED")
