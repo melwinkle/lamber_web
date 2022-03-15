@@ -67,8 +67,10 @@ useEffect(()=>{
             name.push(snapshot.val())
             setData({datas:name});
             setName(name[0].Hospital_name);
-            setLat(name[0].Hospital_location.split(",").at(0));
-      setLong(name[0].Hospital_location.split(",").at(1));
+            var dist=name[0].Hospital_location.split(",");
+            
+            setLat(dist[0]);
+      setLong(dist[1]);
 
       setOrigin(name[0].Hospital_name);
 
@@ -342,14 +344,7 @@ function directionsCallback (response) {
                                             )
                                           }
                                 </GoogleMap>
-                                {/* <GoogleMap
-                                  mapContainerStyle={containerStyle}
-                                  center={center}
-                                  zoom={10}
-                                >
-                 
-                                  <></>
-                                </GoogleMap> */}
+                            
                               </LoadScript>
                             </MDBCardText>
 
