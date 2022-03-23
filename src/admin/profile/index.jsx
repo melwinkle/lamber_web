@@ -23,7 +23,7 @@ const [number, setNumber] = useState("");
 const [status, setStatus] = useState("");
 const [email, setEmail] = useState("");
 
-  
+const [account, setAcc] = useState("");
 useEffect(()=>{
   auth.onAuthStateChanged(user => {
         if (user) {
@@ -40,6 +40,7 @@ useEffect(()=>{
               setNumber(name[0].Hospital_number);
               setStatus(name[0].Status);
               setEmail(name[0].Hospital_email);
+              setAcc(name[0].Account);
             } else {
               console.log("No data available");
             }
@@ -113,10 +114,11 @@ function logout(){
                             <MDBCol><span class="singleh">Location:<span class="singlet"><a href={location}>{location}</a></span></span></MDBCol>
                             <MDBCol><span class="singleh">Email:<span class="singlet">{email}</span></span></MDBCol>
                             <MDBCol><span class="singleh">Phone Number:<span class="singlet">{number}</span></span></MDBCol>
+                            <MDBCol><span class="singleh">PayStack Account:<span class="singlet">{account}</span></span></MDBCol>
                             </MDBCardText>
 
                             <MDBBtn href='/admin/profile/update' active>Update</MDBBtn>
-                                <MDBBtn href='/admin/requests/general' >Request Termination</MDBBtn>
+                                <MDBBtn href='/admin/profile/account' >Add Bank Account</MDBBtn>
                             
                             
                         </MDBCardBody>

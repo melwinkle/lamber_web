@@ -103,7 +103,7 @@ useEffect(()=>{
               }
 
               for(var keys in data){
-                if(data[keys].Status=="Pending"){
+                if(data[key].Hospital_uid==uid && data[keys].Status=="Pending"){
                   incoming.push(data);
                  
                 }

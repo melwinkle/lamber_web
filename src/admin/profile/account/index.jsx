@@ -7,12 +7,12 @@ import Form from "react-bootstrap/Form";
 import "../../../App.css";
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn,MDBTable, MDBTableHead, MDBTableBody, MDBBtnGroup,MDBInput,MDBSelect} from 'mdb-react-ui-kit';
 import {FaEye} from "react-icons/fa";
-import { getDatabase, ref, child, get,set } from "firebase/database";
+import { getDatabase, ref, child, get,update } from "firebase/database";
 import { getAuth,signOut } from "firebase/auth";
 import {FiLogOut} from "react-icons/fi";
 
 
-export default function AddEmployee() {
+export default function AddBank() {
 
 
   const name=[];
@@ -79,93 +79,44 @@ function logout(){
   })
 }
 
-    const [fname, setFirst] = useState("");
-    const [lname, setLast] = useState("");
-    const [phone, setPhone] = useState("");
-    const [email, setMail] = useState("");
-    const [role, setRole] = useState("");
+    const [bank, setFirst] = useState("");
+    const [number, setLast] = useState("");
+
+    const [names, setMail] = useState("");
+
     // const [username, setUser] = useState("");
-    const [password, setPass] = useState("");
+
+    
     const onChangeHandler = (fieldName, value)=>{
-        if(fieldName === "email"){
+        if(fieldName === "bank"){
         setMail(value);
         }
-        else if(fieldName==="fname"){
+        else if(fieldName==="number"){
         setFirst(value);
         }
-        else if(fieldName==="lname"){
+        else if(fieldName==="name"){
         setLast(value);
         }
-        else if(fieldName==="phone"){
-        setPhone(value);
-        }
-        // else if(fieldName==="username"){
-        // setUser(value);
-        // }
-        else if(fieldName==="role"){
-            setRole(value);
-            }
-        else if(fieldName==="password"){
-            setPass(value);
-        }
+       
   }
 
 
   const handleSubmit = (e)=>{
     e.preventDefault();
-    
- 
-    try {
-
-      const users=fname+lname
-      set(ref(db, 'users/ems_temp/' + users), {
-        Email: email,
-        First_name: fname,
-        Last_name: lname,
-        Number:phone,
-        Status: "Active",
-        Hospital:hospital,
-        Role:role,
-        Hospital_uid:hospid
-      }).then(()=>{
-        alert("Employee Added successfully");
-        window.location.href="/admin/employees"
-      });
-      
   
-      // createUserWithEmailAndPassword(auth, email, password)
-      // .then((userCredential) => {
-      //   // Signed in 
-      //   const user = userCredential.user;
-
-      //   set(ref(db, 'users/ems_temp/' + user.uid), {
-      //     Email: user.email,
-      //     First_name: fname,
-      //     Last_name: lname,
-      //     Number:phone,
-      //     Status: "Active",
-      //     Hospital:hospital,
-      //     Role:role
-      //   }).then(()=>{
-      //     alert("Employee Added successfully");
-      //     window.location.href="/admin/employees"
-      //   });
-       
-      //   // ...
-      // })
-    
-      // .catch((error) => {
-      //   const errorMessage = error.message;
-
-      //   console.log(errorMessage)
-      //   // ..
-      // });
-    
-
-  } catch (error) {
-      console.log(error.message)
-  }
-
+    const db = getDatabase();
+    const dbRef = ref(db, `hospital/${user.uid}`);
+    update(dbRef,{
+    Bank_name: bank,
+    Bank_number: number,
+    Account_name:names
+  }).then(() => {
+    console.log("Data updated");
+    window.location="/admin/profile";
+  }).catch((e) => {
+    console.log(e);
+  })
+  
   }
 
     
@@ -190,30 +141,21 @@ function logout(){
             </Navbar>
 
             <div>
-                <MDBBtn href="/admin/employees"active>BACK</MDBBtn>
+                <MDBBtn href="/admin/profile"active>BACK</MDBBtn>
             </div>
 
               <div class="d-flex add align-items-start mb-3">
                 <MDBCol>
                     <MDBCard style= {{ maxWidth: '40rem' }}>
                         <MDBCardBody>
-                                <MDBCardTitle>Add New Employee</MDBCardTitle>
+                                <MDBCardTitle>Add Bank Account</MDBCardTitle>
                                 <form onSubmit={(e)=>{handleSubmit(e)}}>
-                                    <MDBInput className='mb-4'  id='form1' type='text' label="First Name" onChange={(e)=>{ onChangeHandler("fname",e.target.value)}} />
-                                    <MDBInput className='mb-4' id='form2' type='text' label="Last Name"  onChange={(e)=>{ onChangeHandler("lname",e.target.value)}}/>
-                                    <MDBInput  className='mb-4' label='Phone number' id='typePhone' type='tel' onChange={(e)=>{ onChangeHandler("phone",e.target.value)}} />
-                                    <MDBInput className='mb-4' type='email' id='form2Example1' label='Email address'  onChange={(e)=>{ onChangeHandler("email",e.target.value)}}/>
+                                    <MDBInput className='mb-4'  id='form1' type='text' label="Bank Name" onChange={(e)=>{ onChangeHandler("bank",e.target.value)}} />
+                                    <MDBInput className='mb-4' id='form2' type='text' label="Bank Account Number"  onChange={(e)=>{ onChangeHandler("number",e.target.value)}}/>
+                                    <MDBInput  className='mb-4' label='Account Name' id='typePhone' type='text' onChange={(e)=>{ onChangeHandler("name",e.target.value)}} />
+                                   
                                     
-                                    <Form.Select className='mb-4' aria-label="Default select example" onChange={(e)=>{ onChangeHandler("role",e.target.value)}}>
-                                        <option>User Role</option>
-                                        <option value="EMS">EMS Personnel</option>
-                                        <option value="Driver">Driver</option>
-                                    </Form.Select>
-                                    {/* <MDBInput className='mb-4' id='form4' type='text' label="Username"  onChange={(e)=>{ onChangeHandler("username",e.target.value)}}/> */}
-
-
-                                    <MDBInput className='mb-4' type='password' id='form2Example2' label='Password' onChange={(e)=>{ onChangeHandler("password",e.target.value)}}/>
-                                 
+                                   
 
                                     <MDBBtn type='submit' className='mb-4'  block>
                                         ADD

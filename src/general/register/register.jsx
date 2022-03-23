@@ -9,7 +9,7 @@ import {
 } from 'mdb-react-ui-kit';
 import "../../App.css";
 import { getDatabase, ref, set } from "firebase/database";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword ,sendEmailVerification} from "firebase/auth";
 
 export default function Register() {
   const [name, setCompany] = useState("");
@@ -40,6 +40,7 @@ export default function Register() {
   }
   const auth = getAuth();
   const db = getDatabase();
+  
   const handleSubmit = (e)=>{
     e.preventDefault();
    
@@ -48,24 +49,33 @@ export default function Register() {
       .then((userCredential) => {
         // Signed in 
         const user = userCredential.user;
-
+        sendEmailVerification(auth.currentUser)
+           .then(() => {
+            alert("Verfication Email sent");
+           })
+           .catch((error) => {
+               console.log('Email verification error', error);
+           });
+       
         set(ref(db, 'hospital/' + user.uid), {
           Hospital_name: name,
-          Hospital_phone: phone,
+          Hospital_number: phone,
           Hospital_location: location,
           Status:"Active",
           userrole:1,
           Hospital_date:Date().toLocaleString(),
           uid: user.uid,
-          email: user.email,
+          Hospital_email: user.email,
           Vehicle:0,
         }).then(()=>{
           auth.onAuthStateChanged(user => {
                 if (user) {
-                    window.location.href="/";
+                 
+                    window.location.href="/general";
                 }
             })
         });
+      
        
         // ...
       })

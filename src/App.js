@@ -20,6 +20,7 @@ import EmployeePost from "./admin/employees/single";
 import AddEmployee from "./admin/employees/add";
 import Profile from "./admin/profile";
 import AProfileUpdate from "./admin/profile/update";
+import AddBank from './admin/profile/account';
 
 import EHome from "./ems";
 import EMSDashboard from "./ems/dashboard";
@@ -49,6 +50,7 @@ function App(){
         <Route path="/admin/employees/single/:id" element={<EmployeePost />} />
         <Route path="/admin/profile" element={<Profile />} />
         <Route path="/admin/profile/update" element={<AProfileUpdate />} />
+        <Route path="/admin/profile/account" element={<AddBank />} />
         <Route path="/admin/employees/add/" element={<AddEmployee />} />
 
         <Route path="/ems/" element={<EHome />} />

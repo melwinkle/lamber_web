@@ -57,9 +57,15 @@ const handleSubmit = (e)=>{
   
   signInWithEmailAndPassword(auth, email, password)
   .then((userCredential) => {
-    // Signed in 
+    // Signed in  
     const user = userCredential.user;
-    getUserData(user.uid)
+    if(user.emailVerified){
+     
+      getUserData(user.uid)
+    }else{
+      alert("Not Verified");
+    }
+   
    
     // ...
   })
