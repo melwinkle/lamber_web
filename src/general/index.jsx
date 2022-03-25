@@ -107,7 +107,7 @@ get(child(dbRef, `hospital/${uid}`)).then((snapshot) => {
   if (snapshot.exists()) {
     setData({...snapshot.val()})
     console.log(snapshot.val());
-    window.location.href="admin";
+    window.location.href="/admin";
 
   } else {
     console.log("No data available");
@@ -158,7 +158,7 @@ const [itemsArray, setItemsArray] = useState([]);
                                 <MDBCheckbox id='form2Example3' label='Remember me' defaultChecked />
                                 </MDBCol>
                                 <MDBCol>
-                                <a href='#!'>Forgot password?</a>
+                                <a href='/general/password/'>Forgot password?</a>
                                 </MDBCol>
                             </MDBRow>
 

@@ -9,6 +9,8 @@ import Home from "./index.jsx";
 import AHome from "./general";
 import Dashboard from "./admin";
 import Register from "./general/register/register";
+import AForgot from './general/password';
+
 import IncomingRequests from "./admin/requests/";
 import GeneralRequests from "./admin/requests/general";
 import SingleRequest from "./admin/requests/single";
@@ -21,6 +23,7 @@ import AddEmployee from "./admin/employees/add";
 import Profile from "./admin/profile";
 import AProfileUpdate from "./admin/profile/update";
 import AddBank from './admin/profile/account';
+
 
 import EHome from "./ems";
 import EMSDashboard from "./ems/dashboard";
@@ -39,6 +42,7 @@ function App(){
         <Route path="/" element={<Home />} />
         <Route path="/general/" element={<AHome />} />
         <Route path="/general/register/" element={<Register />} />
+        <Route path="/general/password/" element={<AForgot />} />
         <Route path="/admin/" element={<Dashboard />} />
         <Route path="/admin/requests/" element={<IncomingRequests />} />
         <Route path="/admin/requests/general/" element={<GeneralRequests />} />

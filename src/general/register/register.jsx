@@ -71,7 +71,7 @@ export default function Register() {
           auth.onAuthStateChanged(user => {
                 if (user) {
                  
-                    window.location.href="/general";
+                    window.location.href="/";
                 }
             })
         });
