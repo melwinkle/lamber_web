@@ -26,6 +26,7 @@ export default function AcceptRequests() {
     const [location, setloc] = useState("");
     const [hid, setID] = useState("");
     const [destination, setDest] = useState("");
+    const [acc, setAcc] = useState("");
     // const [username, setUser] = useState("");
    
     const onChangeHandler = (fieldName, value)=>{
@@ -48,6 +49,7 @@ export default function AcceptRequests() {
                   name.push(snapshot.val())
                   setName(name[0].Hospital_name);
                   setloc(name[0].Hospital_location);
+                  setAcc(name[0].Account);
                   setID(user.uid);
     
                 } else {
@@ -86,6 +88,7 @@ export default function AcceptRequests() {
           Hospital_location:location,
           Hospital_uid:hid,
           Vehicle:1,
+          Account:acc
         }).then(() => {
           console.log("Assigned");
           alert("EMS ASSIGNED")
