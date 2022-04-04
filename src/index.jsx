@@ -13,7 +13,7 @@ import { getAuth,signInWithEmailAndPassword } from "firebase/auth";
 import * as logo from '../src/images/lamber_logo.png';
 
 const AHome=()=>{
-
+  const [info, setInfo] = useState("");
 const [email, setName] = useState("");
 const [password, setEmail] = useState("");
 
@@ -46,7 +46,8 @@ const handleSubmit = (e)=>{
 
   })
   .catch((error) => {
-    console.log( error.message);
+    console.log( error.code);
+    setInfo( error.code)
 
   });
 
@@ -64,7 +65,7 @@ get(child(dbRef, `hospital/${uid}`)).then((snapshot) => {
     console.log("No data available");
   }
 }).catch((error) => {
-  console.error(error);
+  console.error(error.code);
 });
 
 }
@@ -79,6 +80,7 @@ get(child(dbRef, `hospital/${uid}`)).then((snapshot) => {
                   </div>
                  
                         <MDBCardTitle>LAMBER MANAGEMENT</MDBCardTitle>
+                        <h4>{info}</h4>
                         <form onSubmit={(e)=>{handleSubmit(e)}}>
                             <MDBInput className='mb-4' type='email' id='form2Example1' label='Email address'  onChange={(e)=>{ onChangeHandler("email",e.target.value)}}/>
                            
