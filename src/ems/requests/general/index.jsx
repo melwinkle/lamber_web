@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
+import * as logo from '../../../images/lamber_logo.png';
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
@@ -120,7 +121,7 @@ useEffect(()=>{
         <div class='dashboard'>
             <Navbar fixed="top" >
               <Container>
-                <Navbar.Brand href="#admin">Lamber Admin</Navbar.Brand>
+               <Navbar.Brand href="#admin"><img src={logo} width="50" height="50" alt=""/>Lamber Admin</Navbar.Brand>
                 <Nav className="me-auto" variant="tabs" defaultActiveKey="/ems/requests">
                     <Nav.Link href="/ems/dashboard">Home</Nav.Link>
                     <Nav.Link href="/ems/requests">Requests</Nav.Link>

@@ -1,6 +1,6 @@
-import React, {useState , useEffect} from 'react';
+import React, {useState} from 'react';
 import "../../src/App.css";
-import { getDatabase, ref, onValue,child, get } from "firebase/database";
+import { getDatabase, ref,child, get } from "firebase/database";
 import {
     MDBInput,
     MDBCol,
@@ -10,39 +10,17 @@ import {
     MDBCard, MDBCardBody, MDBCardTitle,
   } from 'mdb-react-ui-kit';
 
-// import {onAuthStateChanged, signInWithEmailAndPassword } from 'firebase/auth';
+
 import { getAuth,signInWithEmailAndPassword } from "firebase/auth";
 
-// import{auth} from './index';
+
 const EHome=()=>{
-    const[data,setData] = useState({});
-    const db = getDatabase();
-//     useEffect(()=>{
 
-//         const starCountRef = ref(db, 'hospital');
-//         onValue(starCountRef, (snapshot) => {
-//             const data = snapshot.val();
-//             if(data!==null){
-//                 setData({...snapshot.val()})
-//                 console.log(data);
 
-//             }else{
-//                 setData({});
-//             }
-        
-
-//             return () =>{
-//                 setData({});
-//             };
-
-//     })
-// },[]);
 const [email, setName] = useState("");
 const [password, setEmail] = useState("");
 
 const auth = getAuth();
-
-// const [user,setUser]=useState({});
 const onChangeHandler = (fieldName, value)=>{
   if(fieldName === "email"){
     setName(value);
@@ -64,42 +42,17 @@ const handleSubmit = (e)=>{
     // ...
   })
   .catch((error) => {
-    const errorCode = error.code;
-    const errorMessage = error.message;
+    console.log(error.message);
+
   });
 
- 
-   
-
-
-   
-
-  
-
-//   if(email.trim()==="" || password.trim() ===""){
-//     alert("Both Fields Required");
-//   }
-//   else{
-//     alert("Login Succesful");
-//     if(email=="ems@gmail.com"){
-//       setName("");
-//       setEmail("");
-//       window.location.href="ems";
-//     }
-//     else{
-//       setName("");
-//       setEmail("");
-//       window.location.href="admin";
-//     }
-   
-//   }
 }
 
 function getUserData(uid) {
     const dbRef = ref(getDatabase());
 get(child(dbRef, `users/ems/${uid}`)).then((snapshot) => {
   if (snapshot.exists()) {
-    setData({...snapshot.val()})
+
     console.log(snapshot.val());
     window.location.href="/ems/dashboard";
 
@@ -112,19 +65,6 @@ get(child(dbRef, `users/ems/${uid}`)).then((snapshot) => {
 
 }
 
-
-
-
-
-
-
-
-
-
-
-
-  
-const [itemsArray, setItemsArray] = useState([]);
     return(
         <div class="login">
         <div>

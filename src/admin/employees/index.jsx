@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
+import * as logo from '../../images/lamber_logo.png';
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
@@ -41,24 +42,6 @@ useEffect(()=>{
           });
 
           employee_count(user.uid);
-
-      //     const starCountRef = ref(db, `hospital/${user.uid}`);
-      //     onValue(starCountRef, (snapshot) => {
-      //         const data = snapshot.val();
-      //         if(data!==null){
-      //             setData({...snapshot.val()})
-      //             console.log(data);
-  
-      //         }else{
-      //             setData({});
-      //         }
-          
-  
-      //         return () =>{
-      //             setData({});
-      //         };
-  
-      // })
            
         }
     })
@@ -92,7 +75,7 @@ function employee_count(uid){
                 '<td >' + data[key].Number +'</td>' +
                 "<td>" + data[key].Role +"</td>" +
                 "<td>" + data[key].Status +"</td>" +
-                "<td>"+"<a class='btn btn-warning' href='/admin/employees/single/"+key+"'>"+"View"+"</a>"+"</td>" +
+                "<td>"+"<a class='btn-warning' href='/admin/employees/single/"+key+"'>"+"<i class='gg-eye'></i></a>"+"</td>" +
                 "</tr>";
         
            
@@ -120,11 +103,12 @@ function employee_count(uid){
         <div class='dashboard'>
             <Navbar fixed="top" >
               <Container>
-                <Navbar.Brand href="#admin">Lamber Admin</Navbar.Brand>
+               <Navbar.Brand href="#admin"><img src={logo} width="50" height="50" alt=""/>Lamber Admin</Navbar.Brand>
                 <Nav className="me-auto" variant="tabs" defaultActiveKey="/admin/employees">
                     <Nav.Link href="/admin">Home</Nav.Link>
                     <Nav.Link href="/admin/requests">Requests</Nav.Link>
                     <Nav.Link href="/admin/employees">Employees</Nav.Link>
+                    <Nav.Link href="/admin/finance">Finance</Nav.Link>
                   </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
@@ -137,7 +121,7 @@ function employee_count(uid){
             </Navbar>
 
             
-            <div>
+            <div class="states">
             <MDBBtn href="/admin/employees/add"active>Add New Employee <FaPlus/></MDBBtn>
             </div>
               <div class="d-flex live align-items-start mb-3">

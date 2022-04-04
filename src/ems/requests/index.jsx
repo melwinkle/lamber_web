@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
+import * as logo from '../../images/lamber_logo.png';
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";

@@ -1,15 +1,18 @@
 import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
+import * as logo from '../images/lamber_logo.png';
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
 import "../../src/App.css";
 import Form from "react-bootstrap/Form";
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText, MDBBtn,MDBTable, MDBTableHead, MDBTableBody } from 'mdb-react-ui-kit';
-import {BiHealth} from "react-icons/bi";
+import {BiHealth, BiPhoneIncoming} from "react-icons/bi";
 import {FiLogOut} from "react-icons/fi";
+import{BsReceiptCutoff,BsPeopleFill} from "react-icons/bs";
 import { getDatabase, ref, onValue,child, get ,update} from "firebase/database";
 import { getAuth,signOut  } from "firebase/auth";
+
 
 export default function Dashboard() {
   
@@ -53,24 +56,6 @@ useEffect(()=>{
           request_count(user.uid);
           employee_count(user.uid);
 
-      //     const starCountRef = ref(db, `hospital/${user.uid}`);
-      //     onValue(starCountRef, (snapshot) => {
-      //         const data = snapshot.val();
-      //         if(data!==null){
-      //             setData({...snapshot.val()})
-      //             console.log(data);
-  
-      //         }else{
-      //             setData({});
-      //         }
-          
-  
-      //         return () =>{
-      //             setData({});
-      //         };
-  
-      // })
-           
         }
     })
           
@@ -165,53 +150,21 @@ function logout(){
   })
 }
 
-const checkonline = (e) => {
-  const checked = e.target.checked;
-  // const dbRef = ref(getDatabase());
-  // // const userRef=dbRef('users/ems/' + user.uid);
-  const db = getDatabase();
-  const dbRef = ref(db, `hospital/${user.uid}`);
-
-  if (checked) {
-    update(dbRef,{
-      Online:1 ,
-    }).then(() => {
-      console.log("Online");
-    }).catch((e) => {
-      console.log(e);
-    })
-
-  } else {
-    update(dbRef,{
-      Online:0 ,
-    }).then(() => {
-      console.log("Offline");
-    }).catch((e) => {
-      console.log(e);
-    })
-  }
-};
   return (
         <div class='dashboard'>
             <Navbar fixed="top" >
               <Container>
-                <Navbar.Brand href="#admin">Lamber Admin</Navbar.Brand>
+           
+                <Navbar.Brand href="#admin"><img src={logo} width="50" height="50" alt=""/>Lamber Admin</Navbar.Brand>
                 <Nav className="me-auto" variant="tabs" defaultActiveKey="/admin">
                     <Nav.Link href="/admin">Home</Nav.Link>
                     <Nav.Link href="/admin/requests">Requests</Nav.Link>
                     <Nav.Link href="/admin/employees">Employees</Nav.Link>
+                    <Nav.Link href="/admin/finance">Finance</Nav.Link>
                   </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
-                <Form class="online">
-                      <Form.Check 
-                        type="switch"
-                        id="custom-switch"
-                        label="Online"
-                        checked={check}
-                        onClick={(e)=>checkonline(e)}
-                      />
-                    </Form>
+                
                   <Navbar.Text>
                 
                   <a href="/admin/profile">{hospital}</a>  
@@ -227,30 +180,30 @@ const checkonline = (e) => {
 
             <div class="d-flex sum align-items-start mb-3" >
                 <MDBCol>
-                    <MDBCard style={{ maxWidth: '22rem' }}>
+                    <MDBCard >
                         <MDBCardBody>
                             <MDBCardText>
-                              <span>{req_count}<BiHealth/></span>
+                              <span>{req_count}<BsReceiptCutoff/></span>
                             </MDBCardText>
                             <MDBCardTitle>TOTAL REQUESTS</MDBCardTitle>
                         </MDBCardBody>
                       </MDBCard>
                   </MDBCol>
                   <MDBCol>
-                    <MDBCard style={{ maxWidth: '22rem' }}>
+                    <MDBCard >
                         <MDBCardBody>
                             <MDBCardText>
-                              <span>{inc_count}<BiHealth/></span>
+                              <span>{inc_count}<BiPhoneIncoming/></span>
                             </MDBCardText>
                             <MDBCardTitle>INCOMING REQUESTS</MDBCardTitle>
                         </MDBCardBody>
                       </MDBCard>
                   </MDBCol>
                   <MDBCol>
-                  <MDBCard style={{ maxWidth: '22rem' }}>
+                  <MDBCard >
                         <MDBCardBody>
                             <MDBCardText>
-                              <span>{emp_count}<BiHealth/></span>
+                              <span>{emp_count}<BsPeopleFill/></span>
                             </MDBCardText>
                             <MDBCardTitle>TOTAL EMPLOYEES</MDBCardTitle>
                         </MDBCardBody>
@@ -258,9 +211,9 @@ const checkonline = (e) => {
                   </MDBCol>
               </div>
 
-              <div class="d-flex live align-items-start mb-3">
+              <div class="d-flex live align-items-start dash mb-3">
                 <MDBCol>
-                    <MDBCard style={{ maxWidth: '35rem' }}>
+                    <MDBCard >
                         <MDBCardBody>
                             <MDBCardTitle>LIVE REQUESTS</MDBCardTitle>
                             <MDBCardText>
@@ -284,7 +237,7 @@ const checkonline = (e) => {
                   </MDBCol>   
 
                   <MDBCol>
-                    <MDBCard style={{ maxWidth: '35rem' }}>
+                    <MDBCard >
                         <MDBCardBody>
                             <MDBCardTitle>EMPLOYEE COUNT</MDBCardTitle>
                             <MDBCardText>

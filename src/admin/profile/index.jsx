@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
+import * as logo from '../../images/lamber_logo.png';
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
@@ -48,23 +49,7 @@ useEffect(()=>{
             console.error(error);
           });
 
-      //     const starCountRef = ref(db, `hospital/${user.uid}`);
-      //     onValue(starCountRef, (snapshot) => {
-      //         const data = snapshot.val();
-      //         if(data!==null){
-      //             setData({...snapshot.val()})
-      //             console.log(data);
-  
-      //         }else{
-      //             setData({});
-      //         }
-          
-  
-      //         return () =>{
-      //             setData({});
-      //         };
-  
-      // })
+
            
         }
     })
@@ -83,11 +68,12 @@ function logout(){
         <div class='dashboard'>
             <Navbar fixed="top" >
               <Container>
-                <Navbar.Brand href="#admin">Lamber Admin</Navbar.Brand>
+               <Navbar.Brand href="#admin"><img src={logo} width="50" height="50" alt=""/>Lamber Admin</Navbar.Brand>
                 <Nav className="me-auto" variant="tabs" defaultActiveKey="/admin">
                     <Nav.Link href="/admin">Home</Nav.Link>
                     <Nav.Link href="/admin/requests">Requests</Nav.Link>
                     <Nav.Link href="/admin/employees">Employees</Nav.Link>
+                    <Nav.Link href="/admin/finance">Finance</Nav.Link>
                   </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
@@ -117,8 +103,12 @@ function logout(){
                             <MDBCol><span class="singleh">PayStack Account:<span class="singlet">{account}</span></span></MDBCol>
                             </MDBCardText>
 
-                            <MDBBtn href='/admin/profile/update' active>Update</MDBBtn>
-                                <MDBBtn href='/admin/profile/account' >Add Bank Account</MDBBtn>
+                            <div class="profb">
+                              <MDBBtn href='/admin/profile/update' active>Update</MDBBtn>
+                              <MDBBtn href='/admin/profile/account' >Update Bank Details</MDBBtn>
+                              
+                            </div>
+                           
                             
                             
                         </MDBCardBody>

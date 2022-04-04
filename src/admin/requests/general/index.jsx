@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
+import * as logo from '../../../images/lamber_logo.png';
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
@@ -39,23 +40,7 @@ useEffect(()=>{
             console.error(error);
           });
           request_count(user.uid);
-      //     const starCountRef = ref(db, `hospital/${user.uid}`);
-      //     onValue(starCountRef, (snapshot) => {
-      //         const data = snapshot.val();
-      //         if(data!==null){
-      //             setData({...snapshot.val()})
-      //             console.log(data);
-  
-      //         }else{
-      //             setData({});
-      //         }
-          
-  
-      //         return () =>{
-      //             setData({});
-      //         };
-  
-      // })
+ 
            
         }
     })
@@ -89,7 +74,7 @@ function request_count(uid){
                 "<td>" + data[key].Request_Type +"</td>" +
                 "<td>" + data[key].Reason +"</td>" +
                 "<td>" + data[key].Status +"</td>" +
-                "<td>"+"<a class='btn btn-warning' href='/admin/requests/single/"+key+"'>"+"View"+"</button>"+"</td>" +
+                "<td>"+"<a class='btn btn-warning' href='/admin/requests/single/"+key+"'>"+"<i class='gg-eye'></i>"+"</button>"+"</td>" +
            
                 "</tr>";
 
@@ -117,11 +102,12 @@ function request_count(uid){
         <div class='dashboard'>
             <Navbar fixed="top" >
               <Container>
-                <Navbar.Brand href="#admin">Lamber Admin</Navbar.Brand>
+               <Navbar.Brand href="#admin"><img src={logo} width="50" height="50" alt=""/>Lamber Admin</Navbar.Brand>
                 <Nav className="me-auto" variant="tabs" defaultActiveKey="/admin/requests">
                     <Nav.Link href="/admin">Home</Nav.Link>
                     <Nav.Link href="/admin/requests">Requests</Nav.Link>
                     <Nav.Link href="/admin/employees">Employees</Nav.Link>
+                    <Nav.Link href="/admin/finance">Finance</Nav.Link>
                   </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
@@ -133,7 +119,7 @@ function request_count(uid){
               </Container>
             </Navbar>
 
-            <div>
+            <div class="state">
               <MDBBtnGroup aria-label='Basic example'>
                   <MDBBtn href='/admin/requests' outline color='primary'>
                     Active
@@ -146,7 +132,7 @@ function request_count(uid){
               <MDBCol>
                     <MDBCard >
                         <MDBCardBody>
-                            <MDBCardTitle>INCOMING REQUESTS</MDBCardTitle>
+                            <MDBCardTitle>COMPLETED REQUESTS</MDBCardTitle>
                             <MDBCardText>
                                 <MDBTable>
                                     <MDBTableHead>

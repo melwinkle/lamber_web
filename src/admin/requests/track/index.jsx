@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
+import * as logo from '../../../images/lamber_logo.png';
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
@@ -15,9 +16,8 @@ import { Loader } from "@googlemaps/js-api-loader";
 import { Wrapper, Status } from "@googlemaps/react-wrapper";
 import { GoogleMap, LoadScript, DirectionsService ,DirectionsRenderer,Marker} from '@react-google-maps/api';
 
-// const ScriptLoaded = require("../../../../node_modules/@react-google-maps/api/src/docs/ScriptLoaded.tsx").default;
-// const ScriptLoaded = require("./docs/ScriptLoaded").default;
-// import axios from 'axios';
+
+
 
 export default function ETrackRequest() {
   const[data,setData] = useState({});
@@ -44,14 +44,9 @@ const [response,setRes]=useState(null);
 const [travelMode,setMode]=useState("DRIVING");
 const [origin,setOrigin]=useState("");
 const [destination,setDestination]=useState("");
-// const axios = require('axios');
 const [distance,setDistance]=useState("");
 const [duration,setDuration]=useState("");
-// const config = {
-//   method: 'get',
-//   url: 'https://maps.googleapis.com/maps/api/directions/json?origin=Toronto&destination=Montreal&key=AIzaSyCaG0u5EfOCiQTSWQyEia2HBbhl3wxcB-g',
-//   headers: { }
-// };
+
 
 
 const [map, setMap] = useState({});
@@ -81,13 +76,6 @@ useEffect(()=>{
           console.error(error);
         });
              Info(id);
-            
-       
-
-
-           
-
-
 
         }
     })
@@ -153,13 +141,25 @@ useEffect(()=>{
   }
 
 
+  function Trip(){
+    return (
+      <div>
+        {stat=="Trip" &&       
+        <div>
+          <h5>STATUS</h5>
+         <h6>Trip Ongoing</h6>
+        </div> 
+          
+          } 
+      </div>
+    );
+  }
 
 
   function logout(){
     signOut(auth).then(() => {
       window.location.href='/';
     }).catch((error) => {
-      // An error happened.
     })
   }
 
@@ -223,7 +223,7 @@ useEffect(()=>{
 
 console.log(lat)
 const containerStyle = {
-  width: '30rem',
+  width: '90%',
   height: '30rem'
 };
 
@@ -259,6 +259,7 @@ function directionsCallback (response) {
                     <Nav.Link href="/admin">Home</Nav.Link>
                     <Nav.Link href="/admin/requests">Requests</Nav.Link>
                     <Nav.Link href="/admin/employees">Employees</Nav.Link>
+                    <Nav.Link href="/admin/finance">Finance</Nav.Link>
                   </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
@@ -270,12 +271,12 @@ function directionsCallback (response) {
               </Container>
             </Navbar>
 
-            <div>
-              <MDBBtnGroup aria-label='Basic example'>
+            <div class="states">
+
                   <MDBBtn href='/admin/requests' active>
                     Back
                   </MDBBtn>
-                </MDBBtnGroup>
+
               </div>
 
               <div class="d-flex single align-items-start mb-3">
@@ -359,11 +360,12 @@ function directionsCallback (response) {
                               <MDBCardText id="req">
                               <Start />
 
-                            
                                 <Mailbox  />
 
                                 <Arrive  />
+                                <Trip/>
                                 <Complete  />
+
                               </MDBCardText>
                          
                          

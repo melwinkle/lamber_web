@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
+import * as logo from '../../../images/lamber_logo.png';
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
@@ -51,22 +52,7 @@ useEffect(()=>{
             console.error(error);
           });
           request_count(id);
-      //     const starCountRef = ref(db, `hospital/${user.uid}`);
-      //     onValue(starCountRef, (snapshot) => {
-      //         const data = snapshot.val();
-      //         if(data!==null){
-      //             setData({...snapshot.val()})
-      //             console.log(data);
-  
-      //         }else{
-      //             setData({});
-      //         }
-          
-  
-      //         return () =>{
-      //             setData({});
-      //         };
-  
+ 
       // })
            
         }
@@ -86,9 +72,10 @@ useEffect(()=>{
               hosp(snapshot.val().Hospital_uid);
               setDestination(snapshot.val().Destination);
                   fileToShow = 
-                  "<MDBCardTitle>REQUEST #"+ uid +
-                  "<h6>"+snapshot.val().Request_DateTime+"</h6>"+
-                  "<h6>PERSONNEl:"+snapshot.val().Personnel+"</h6>"+
+                  "<MDBCardTitle>"+
+                  "<h6>REQUEST #:"+ uid +"</h6>"+
+                  "<h6>REQUEST DATE:"+ snapshot.val().Request_DateTime+"</h6>"+
+                  "<h6>PERSONNEL:"+snapshot.val().Personnel+"</h6>"+
                   "<h6>VEHICLE RN:"+snapshot.val().Vehicle_Registration+"</h6>"+
               "</MDBCardTitle>"+
              " <MDBCardText>"+
@@ -103,7 +90,7 @@ useEffect(()=>{
               "<MDBCol><span class='singleh'>Rating:<span class='singlet'>"+snapshot.val().Rating+"/5</span></span></MDBCol><br>"+
               "<MDBCol><span class='singleh'>Audio:<span class='singlet'>"+snapshot.val().Audio+"</span></span></MDBCol><br>"+
              " </MDBCardText>"+
-              "<MDBBtn class='btn btn-success'>Download<FaDownload/></MDBBtn>";
+              "<MDBBtn class='btn btn-success'><span>Download<i class='gg-software-download'></i></span></MDBBtn>";
                 
   
                 if(fileToShow==""){
@@ -128,7 +115,7 @@ function logout(){
   signOut(auth).then(() => {
     window.location.href='/';
   }).catch((error) => {
-    // An error happened.
+ 
   })
 }
 function hosp(uid){
@@ -137,8 +124,7 @@ function hosp(uid){
     
     if (snapshot.exists()) {
       console.log(snapshot.val())
-      // const latitude=snapshot.val().Hospital_location.split(",").at(0);
-      // const longitude=snapshot.val().Hospital_location.split(",").at(1);
+     
      
      
 
@@ -184,11 +170,12 @@ function directionsCallback (response) {
         <div class='dashboard'>
             <Navbar fixed="top" >
               <Container>
-                <Navbar.Brand href="#admin">Lamber Admin</Navbar.Brand>
+               <Navbar.Brand href="#admin"><img src={logo} width="50" height="50" alt=""/>Lamber Admin</Navbar.Brand>
                 <Nav className="me-auto" variant="tabs" defaultActiveKey="/admin/requests">
                     <Nav.Link href="/admin">Home</Nav.Link>
                     <Nav.Link href="/admin/requests">Requests</Nav.Link>
                     <Nav.Link href="/admin/employees">Employees</Nav.Link>
+                    <Nav.Link href="/admin/finance">Finance</Nav.Link>
                   </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
@@ -200,12 +187,12 @@ function directionsCallback (response) {
               </Container>
             </Navbar>
 
-            <div>
-              <MDBBtnGroup aria-label='Basic example'>
+            <div class="states">
+
                   <MDBBtn href='/admin/requests' active>
                     Back
                   </MDBBtn>
-                </MDBBtnGroup>
+
               </div>
 
               <div class="d-flex single align-items-start mb-3">

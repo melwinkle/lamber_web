@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
+import * as logo from '../../images/lamber_logo.png';
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
@@ -29,23 +30,6 @@ const [can_count, setCnc] = useState(0);
 useEffect(()=>{
   auth.onAuthStateChanged(user => {
         if (user) {
-          // const dbRef = ref(getDatabase());
-          // get(child(dbRef, `users/ems/${user.uid}`)).then((snapshot) => {
-            
-          //   if (snapshot.exists()) {
-          //     console.log(snapshot.val())
-          //     name.push(snapshot.val())
-          //     setData({...snapshot.val()})
-          //       console.log(name)
-              
-          //   } else {
-          //     console.log("No data available");
-          //   }
-          // }).catch((error) => {
-          //   console.error(error);
-          // });
-
-      
           const starCountRef = ref(db, `users/ems/${user.uid}`);
                   onValue(starCountRef, (snapshot) => {
                       const datas = snapshot.val();
@@ -54,7 +38,7 @@ useEffect(()=>{
                           console.log(datas);
                           name.push(snapshot.val());
                           setName(name[0].First_name+" "+name[0].Last_name);
-                          if(name[0].Online==1){
+                          if(name[0].Online===1){
                             setCheck(true);
                           }else{
                             setCheck(false);
@@ -80,7 +64,7 @@ useEffect(()=>{
         }
     })
           
-  },[]);
+  },);
 
     
   function request_count(uid){
@@ -93,7 +77,7 @@ useEffect(()=>{
               let file='';
               console.log(snapshot.val())
               for(var key in data){
-                if(data[key].Personnel_uid==uid){
+                if(data[key].Personnel_uid===uid){
                   setCount(data.length);
                   fileToShow += "<tr>" +
                   "<td scope='row'>" + data[key].Destination +"</td>" +
@@ -108,10 +92,10 @@ useEffect(()=>{
               }
 
               for(var keys in data){
-                if(data[keys].Status=="Ongoing"){
+                if(data[keys].Status==="Ongoing"){
                   setInc(data.length);
                 }
-                if(data[keys].Status=="Cancelled"){
+                if(data[keys].Status==="Cancelled"){
                   setCnc(data.length);
                 }
                 
@@ -141,14 +125,13 @@ function logout(){
   signOut(auth).then(() => {
     window.location.href='/';
   }).catch((error) => {
-    // An error happened.
+
   })
 }
 
 const checkonline = (e) => {
   const checked = e.target.checked;
-  // const dbRef = ref(getDatabase());
-  // // const userRef=dbRef('users/ems/' + user.uid);
+
   const db = getDatabase();
   const dbRef = ref(db, `users/ems/${user.uid}`);
 
@@ -175,7 +158,7 @@ const checkonline = (e) => {
         <div class='dashboard'>
             <Navbar fixed="top" >
               <Container>
-                <Navbar.Brand href="#admin">Lamber EMS</Navbar.Brand>
+                <Navbar.Brand href="#admin"><img src={logo} width="50" height="50" alt=""/>Lamber EMS</Navbar.Brand>
                 <Nav className="me-auto" variant="tabs" defaultActiveKey="/ems/dashboard">
                     <Nav.Link href="/ems/dashboard">Home</Nav.Link>
                     <Nav.Link href="/ems/requests">Requests</Nav.Link>
@@ -199,7 +182,7 @@ const checkonline = (e) => {
                      
                    
                      <a href="/ems/profile">{full}</a>
-                     <a onClick={()=>logout()} class="logout"> <FiLogOut/></a>
+                     <a onClick={()=>logout()} class="logout" href="#"> <FiLogOut/></a>
                    
                   </Navbar.Text>
                   

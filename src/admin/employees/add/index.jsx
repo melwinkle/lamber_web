@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
+import * as logo from '../../../images/lamber_logo.png';
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
@@ -47,23 +48,6 @@ useEffect(()=>{
             console.error(error);
           });
 
-      //     const starCountRef = ref(db, `hospital/${user.uid}`);
-      //     onValue(starCountRef, (snapshot) => {
-      //         const data = snapshot.val();
-      //         if(data!==null){
-      //             setData({...snapshot.val()})
-      //             console.log(data);
-  
-      //         }else{
-      //             setData({});
-      //         }
-          
-  
-      //         return () =>{
-      //             setData({});
-      //         };
-  
-      // })
            
         }
     })
@@ -84,7 +68,7 @@ function logout(){
     const [phone, setPhone] = useState("");
     const [email, setMail] = useState("");
     const [role, setRole] = useState("");
-    // const [username, setUser] = useState("");
+
     const [password, setPass] = useState("");
     const onChangeHandler = (fieldName, value)=>{
         if(fieldName === "email"){
@@ -99,9 +83,7 @@ function logout(){
         else if(fieldName==="phone"){
         setPhone(value);
         }
-        // else if(fieldName==="username"){
-        // setUser(value);
-        // }
+     
         else if(fieldName==="role"){
             setRole(value);
             }
@@ -133,33 +115,6 @@ function logout(){
       });
       
   
-      // createUserWithEmailAndPassword(auth, email, password)
-      // .then((userCredential) => {
-      //   // Signed in 
-      //   const user = userCredential.user;
-
-      //   set(ref(db, 'users/ems_temp/' + user.uid), {
-      //     Email: user.email,
-      //     First_name: fname,
-      //     Last_name: lname,
-      //     Number:phone,
-      //     Status: "Active",
-      //     Hospital:hospital,
-      //     Role:role
-      //   }).then(()=>{
-      //     alert("Employee Added successfully");
-      //     window.location.href="/admin/employees"
-      //   });
-       
-      //   // ...
-      // })
-    
-      // .catch((error) => {
-      //   const errorMessage = error.message;
-
-      //   console.log(errorMessage)
-      //   // ..
-      // });
     
 
   } catch (error) {
@@ -173,11 +128,12 @@ function logout(){
         <div class='dashboard'>
             <Navbar fixed="top" >
               <Container>
-                <Navbar.Brand href="#admin">Lamber Admin</Navbar.Brand>
+               <Navbar.Brand href="#admin"><img src={logo} width="50" height="50" alt=""/>Lamber Admin</Navbar.Brand>
                 <Nav className="me-auto" variant="tabs" defaultActiveKey="/admin/employees">
                     <Nav.Link href="/admin">Home</Nav.Link>
                     <Nav.Link href="/admin/requests">Requests</Nav.Link>
                     <Nav.Link href="/admin/employees">Employees</Nav.Link>
+                    <Nav.Link href="/admin/finance">Finance</Nav.Link>
                   </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
@@ -189,7 +145,7 @@ function logout(){
               </Container>
             </Navbar>
 
-            <div>
+            <div class="states">
                 <MDBBtn href="/admin/employees"active>BACK</MDBBtn>
             </div>
 

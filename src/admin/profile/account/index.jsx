@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
+import * as logo from '../../../images/lamber_logo.png';
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
@@ -39,6 +40,10 @@ useEffect(()=>{
            
               setName(name[0].Hospital_name);
               setHosp(name[0].uid);
+              setFirst(name[0].Bank_name);
+              setLast(name[0].Bank_number);
+              setMail(name[0].Account_name);
+
   
             } else {
               console.log("No data available");
@@ -47,23 +52,7 @@ useEffect(()=>{
             console.error(error);
           });
 
-      //     const starCountRef = ref(db, `hospital/${user.uid}`);
-      //     onValue(starCountRef, (snapshot) => {
-      //         const data = snapshot.val();
-      //         if(data!==null){
-      //             setData({...snapshot.val()})
-      //             console.log(data);
-  
-      //         }else{
-      //             setData({});
-      //         }
-          
-  
-      //         return () =>{
-      //             setData({});
-      //         };
-  
-      // })
+     
            
         }
     })
@@ -89,13 +78,13 @@ function logout(){
     
     const onChangeHandler = (fieldName, value)=>{
         if(fieldName === "bank"){
-        setMail(value);
-        }
-        else if(fieldName==="number"){
         setFirst(value);
         }
-        else if(fieldName==="name"){
+        else if(fieldName==="number"){
         setLast(value);
+        }
+        else if(fieldName==="name"){
+        setMail(value);
         }
        
   }
@@ -124,11 +113,12 @@ function logout(){
         <div class='dashboard'>
             <Navbar fixed="top" >
               <Container>
-                <Navbar.Brand href="#admin">Lamber Admin</Navbar.Brand>
-                <Nav className="me-auto" variant="tabs" defaultActiveKey="/admin/employees">
+               <Navbar.Brand href="#admin"><img src={logo} width="50" height="50" alt=""/>Lamber Admin</Navbar.Brand>
+                <Nav className="me-auto" variant="tabs" defaultActiveKey="/admin">
                     <Nav.Link href="/admin">Home</Nav.Link>
                     <Nav.Link href="/admin/requests">Requests</Nav.Link>
                     <Nav.Link href="/admin/employees">Employees</Nav.Link>
+                    <Nav.Link href="/admin/finance">Finance</Nav.Link>
                   </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
@@ -140,7 +130,7 @@ function logout(){
               </Container>
             </Navbar>
 
-            <div>
+            <div class="states">
                 <MDBBtn href="/admin/profile"active>BACK</MDBBtn>
             </div>
 
@@ -150,15 +140,15 @@ function logout(){
                         <MDBCardBody>
                                 <MDBCardTitle>Add Bank Account</MDBCardTitle>
                                 <form onSubmit={(e)=>{handleSubmit(e)}}>
-                                    <MDBInput className='mb-4'  id='form1' type='text' label="Bank Name" onChange={(e)=>{ onChangeHandler("bank",e.target.value)}} />
-                                    <MDBInput className='mb-4' id='form2' type='text' label="Bank Account Number"  onChange={(e)=>{ onChangeHandler("number",e.target.value)}}/>
-                                    <MDBInput  className='mb-4' label='Account Name' id='typePhone' type='text' onChange={(e)=>{ onChangeHandler("name",e.target.value)}} />
+                                    <MDBInput className='mb-4'  id='form1' type='text' label="Bank Name" value={bank} onChange={(e)=>{ onChangeHandler("bank",e.target.value)}} />
+                                    <MDBInput className='mb-4' id='form2' type='text' label="Bank Account Number" value={number}  onChange={(e)=>{ onChangeHandler("number",e.target.value)}}/>
+                                    <MDBInput  className='mb-4' label='Account Name' id='typePhone' type='text' value={names}  onChange={(e)=>{ onChangeHandler("name",e.target.value)}} />
                                    
                                     
                                    
 
                                     <MDBBtn type='submit' className='mb-4'  block>
-                                        ADD
+                                        UPDATE
                                     </MDBBtn>
 
                                    

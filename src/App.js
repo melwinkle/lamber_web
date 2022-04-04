@@ -1,12 +1,10 @@
 import React from 'react';
-import { render } from "react-dom";
 import {
   BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
 import Home from "./index.jsx";
-import AHome from "./general";
 import Dashboard from "./admin";
 import Register from "./general/register/register";
 import AForgot from './general/password';
@@ -23,7 +21,7 @@ import AddEmployee from "./admin/employees/add";
 import Profile from "./admin/profile";
 import AProfileUpdate from "./admin/profile/update";
 import AddBank from './admin/profile/account';
-
+import Finance from './admin/finance';
 
 import EHome from "./ems";
 import EMSDashboard from "./ems/dashboard";
@@ -40,7 +38,6 @@ function App(){
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/general/" element={<AHome />} />
         <Route path="/general/register/" element={<Register />} />
         <Route path="/general/password/" element={<AForgot />} />
         <Route path="/admin/" element={<Dashboard />} />
@@ -56,6 +53,7 @@ function App(){
         <Route path="/admin/profile/update" element={<AProfileUpdate />} />
         <Route path="/admin/profile/account" element={<AddBank />} />
         <Route path="/admin/employees/add/" element={<AddEmployee />} />
+        <Route path="/admin/finance/" element={<Finance />} />
 
         <Route path="/ems/" element={<EHome />} />
         <Route path="/ems/dashboard" element={<EMSDashboard />} />

@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react';
 import Navbar from "react-bootstrap/Navbar";
+import * as logo from '../../images/lamber_logo.png';
 import Container from "react-bootstrap/Container";
 import { MDBCol } from 'mdb-react-ui-kit';
 import Nav from "react-bootstrap/Nav";
@@ -45,26 +46,6 @@ useEffect(()=>{
           request_count(user.uid);
           setUid(user.uid);
           request_new(user.uid);
-          // request_new(user.uid);
-  
-          
-      //     const starCountRef = ref(db, `hospital/${user.uid}`);
-      //     onValue(starCountRef, (snapshot) => {
-      //         const data = snapshot.val();
-      //         if(data!==null){
-      //             setData({...snapshot.val()})
-      //             console.log(data);
-  
-      //         }else{
-      //             setData({});
-      //         }
-          
-  
-      //         return () =>{
-      //             setData({});
-      //         };
-  
-      // })
            
         }
     })
@@ -88,7 +69,7 @@ function request_count(uid){
             let fileToShow='';
             console.log(snapshot.val())
             for(var key in data){
-              if((data[key].Hospital_uid==uid )&& (data[key].Status=="Ongoing")){
+              if((data[key].Hospital_uid==uid )&& (data[key].Status!="Completed")){
                 fileToShow += "<tr>" +
                 "<td scope='row'>" + data[key].Request_DateTime +'</td>' +
                 "<td>" + data[key].Personnel +"</td>" +
@@ -98,7 +79,7 @@ function request_count(uid){
                 "<td>" + data[key].Request_Type +"</td>" +
                 "<td>" + data[key].Reason +"</td>" +
                 "<td>" + data[key].Status +"</td>" +
-                "<td>"+"<a class='btn btn-warning' href='/admin/requests/single/"+key+"'>"+"View"+"</a>"+"<a class='btn btn-success' href='/admin/requests/track/"+key+"'>"+"Track"+"</a>"+"</td>" +
+                "<td>"+"<span><a class='btn-warning' href='/admin/requests/single/"+key+"'>"+"<i class='gg-software-download'></i>"+"</a>"+"<a class='btn-success' href='/admin/requests/track/"+key+"'>"+"<i class='gg-eye'></i>"+"</a></span>"+"</td>" +
            
                 "</tr>";
 
@@ -153,8 +134,8 @@ function request_new(uid){
                   "NEW REQUEST!"+
                 "</div>"+
                 "<div class='card-text'>"+
-                  "Incoming request #"+ key +" from "+ data[key].Destination+
-               " </div>"+
+                  "Request #: "+ key +" <div>Location: "+ data[key].Destination+
+               " </div></div>"+
                 
                   
                  " <a class='accept' href=/admin/requests/accept/"+key+">ACCEPT</a>"+
@@ -177,8 +158,8 @@ function request_new(uid){
                   "NEW REQUEST!"+
                 "</div>"+
                 "<div class='card-text'>"+
-                  "Incoming request #"+ key +" from "+ data[key].Destination+
-               " </div>"+
+                  "Request #: "+ key +" <div>Location: "+ data[key].Destination+
+               " </div></div>"+
                 
                   
                  " <a class='accept' href=/admin/requests/accept/"+key+">ACCEPT</a>"+
@@ -216,11 +197,12 @@ function request_new(uid){
         <div class='dashboard'>
             <Navbar fixed="top" >
               <Container>
-                <Navbar.Brand href="#admin">Lamber Admin</Navbar.Brand>
+               <Navbar.Brand href="#admin"><img src={logo} width="50" height="50" alt=""/>Lamber Admin</Navbar.Brand>
                 <Nav className="me-auto" variant="tabs" defaultActiveKey="/admin/requests">
                     <Nav.Link href="/admin">Home</Nav.Link>
                     <Nav.Link href="/admin/requests">Requests</Nav.Link>
                     <Nav.Link href="/admin/employees">Employees</Nav.Link>
+                    <Nav.Link href="/admin/finance">Finance</Nav.Link>
                   </Nav>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
@@ -232,7 +214,7 @@ function request_new(uid){
               </Container>
             </Navbar>
 
-            <div>
+            <div class="state">
               <MDBBtnGroup aria-label='Basic example'>
                   <MDBBtn href='#' active>
                     Active
@@ -243,16 +225,7 @@ function request_new(uid){
 
               <div class="new" id="new">
 
-              {/* {Object.keys(datas).map((item)=>{
-                  if(datas[item].Status=="Pending"){
-                  
-                    // return <MDBCol><MDBCard className='newcard'><MDBCardBody ><MDBCardTitle >NEW REQUEST!</MDBCardTitle><MDBCardText>Incoming request #{datas[item]}from {datas[item].Destination}</MDBCardText><MDBBtn class='accept'>ACCEPT</MDBBtn><MDBBtn class='decline'>DECLINE</MDBBtn></MDBCardBody></MDBCard></MDBCol>
-                  return <h2>
-                          {datas[item].Destination}
-                          </h2>
-                  
-                 
-                  }})} */}
+            
                </div>
 
               <div class="d-flex live align-items-start mb-3">

@@ -1,5 +1,8 @@
+@import url('https://css.gg/eye.css');
+@import url('https://css.gg/software-download.css');
 .App {
   text-align: center;
+  background-color:#ffc3c7;
 }
 
 .App-logo {
@@ -37,42 +40,215 @@
   }
 }
 
-
+body{
+  background-color:#ffc3c7;
+}
 
 .login{
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10% 0% 0% 0%;
+  margin: 0% 0% 0% 0%;
+  background-color:#fff1f4;
+  min-height: 100vh;
+
 }
 
+.login .card{
+  min-width: 50%;
+}
+
+.login.register .card{
+  height:auto;
+}
+.login.register h4{
+  color:#db5461;
+  font-size: 12pt;
+}
+.login.register .logo img{
+  
+  border-radius:50%;
+  height: 7rem;
+  width: 7rem;
+  margin-top: 1%;
+}
+
+.login .logo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .logo img{
+  
+  border-radius:50%;
+  height: 8rem;
+  width: 8rem;
+  margin-bottom: 2%;
+  margin-top: 1%;
+}
+
+.login .card-title{
+  color:#d87d8c;
+  font-weight:bold;
+  margin-bottom: 2%;
+}
+.login h4{
+  color:#d87d8c;
+  margin-bottom: 2%;
+  text-align: center;
+}
 
 .login .card .card-body .card-title{
   text-align: center;
 }
 
 
-.dashboard{
-  color:black;
-  margin: 8% 0% 0% 5%;
+.login .card .form-outline .form-control,.dashboard .d-flex.add .form-outline .form-control,.dashboard .d-flex.add .form-select,.dashboard .d-flex.profile .form-control{
+  border: 1px solid #d87d8c;
+  color: #d87d8c;
+}
+.login .form-outline .form-control ~ .form-label,.dashboard .d-flex.add .form-outline .form-control ~ .form-label,.dashboard .d-flex.profile .form-outline .form-control ~ .form-label{
+  color: #d87d8c;
 }
 
+.login .form-outline .form-control:focus,.dashboard .d-flex.add .form-outline .form-control:focus,.dashboard .d-flex.profile .form-outline .form-control:focus{
+  border-color:#d87d8c;
+  border: 1px solid #d87d8c;
+}
+
+.login #password a{
+  color:#d87d8c;
+  justify-content: right;
+  display:flex;
+  align-items: center;
+}
+
+.login .sub{
+  background-color:#d87d8c
+
+}
+
+.login .sub:hover{
+  background-color:#d87d8c;
+}
+
+.login .text-center{
+  color:#ffc3c7;
+}
+.login .text-center a{
+  color:#d87d8c;
+}
+
+.dashboard{
+  margin: 0% 0% 0% 0%;
+  background-color:#fff1f46d;
+  height:100vh;
+}
+
+
+.dashboard img{
+  border-radius: 50%;
+}
+.dashboard .navbar{
+  background:#fff;
+}
+
+.dashboard .navbar-light .navbar-brand,.dashboard .navbar-light .navbar-nav .nav-link.active{
+  color:#d87d8c;
+}
+
+.dashboard .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
+  border-color:#d87d8c
+}
+.dashboard .navbar-light .navbar-nav .nav-link{
+  color:#ffc3c7;
+}
+
+.dashboard .navbar-light .navbar-text a, .dashboard.navbar-light .navbar-text a:hover, .dashboard .navbar-light .navbar-text a:focus{
+  color:#d87d8c;
+}
 .dashboard .top .online label{
   margin-left:-2%;
 }
 .dashboard .d-flex.sum{
   text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+
+
  
+}
+
+.dashboard .d-flex.sum .card{
+  width:80%;
+  margin: 25% 0% 0% 10%;
 }
 .dashboard .d-flex.sum span{
-  font-size:20pt;
+  font-size:25pt;
+  color:#ffc3c7;
  
 }
-.dashboard .d-flex.live{
-  margin: 5% 0% 0% 0%;
+.dashboard .d-flex.sum span svg{
+  font-size:20pt;
+  margin-left:2%;
+  color:#d87d8cda;
 }
 
+.dashboard .d-flex.sum .card-title,.dashboard .d-flex.live.dash .card-title, .dashboard .d-flex.live.dash th,.dashboard .d-flex.live th,.dashboard .d-flex.add .card-title{
+  color:#d87d8c;
+  font-weight:bold;
+}
+.dashboard .d-flex.live.dash td,.dashboard .d-flex.live td{
+  color:#d87d8ce9;
+  font-weight:bolder;
+}
+.dashboard .d-flex.live{
+  margin: 5% 2% 0% 2%;
+  color:#d87d8c;
+}
 
+.dashboard .d-flex.live .btn-warning{
+background: none;
+  margin-right: 5%;
+  font-size:5pt;
+  color:#d87d8c;
+  margin-right: 3%;
+
+}
+.dashboard .d-flex.single .btn-success span{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.dashboard .d-flex.single .btn-success{
+  background-color: #d87d8c;
+}
+.dashboard .d-flex.live .table span{
+  display:flex;
+  flex-direction: row;
+  justify-content: space-around;
+
+}
+
+.dashboard .d-flex.live .btn-success{
+  background: none;
+  font-size:5pt;
+  color:#db5461;
+  margin-right: 3%;
+}
+
+.dashboard .d-flex.live .btn,.dashboard .d-flex.add .btn ,.dashboard .state .btn{
+  background-color: #d87d8c;
+}
+
+.dashboard .d-flex.live.dash .card,.dashboard .d-flex.add .card{
+  width:90%;
+}
+.dashboard .d-flex.live.dash .btn{
+  background-color:#d87d8c;
+}
 .dashboard .d-flex.single{
   margin: 5% 0% 0% 0%;
   text-align: center;
@@ -80,10 +256,14 @@
 
 
 .dashboard .d-flex.profile{
-  margin: 5% 0% 0% 0%;
+  margin: 5% 0% 0% 5%;
   text-align: center;
 }
-
+.dashboard .d-flex.profile .card {
+  margin:8% 0% 0% 2%;
+  width: 90%;
+  color: #d87d8c;
+}
 .dashboard .d-flex.live #rating {
   text-align: center;
 }
@@ -91,6 +271,19 @@
   width: 4rem;
   height: 4rem;
   color:orange;
+}
+
+.dashboard .d-flex.single .card .card-body{
+  display: flex;
+  flex-direction: row;
+}
+.dashboard .d-flex.profile .card .btn{
+  background-color:#d87d8ccf;
+  margin-right:2%;
+  margin-top: 2%;
+}
+.dashboard .d-flex.profile .card .btn.active{
+  background-color:#d87d8c;
 }
 .dashboard .d-flex.live #rating
 .dashboard .d-flex.single .card .card-body .card-text{
@@ -104,35 +297,55 @@
   align-items: center;
   margin: 2% 0% 0% 0%;
 }
-.dashboard .d-flex.single .card .card-body .card-text .singleh{
+.dashboard .d-flex.single .card{
+  margin: 0% 0% 0% 2%;
+  width: 90%;
+}
+.dashboard .d-flex.single .card .card-body .card-text .singleh,.dashboard .d-flex.profile .card .card-body .card-text .singleh{
   font-weight:bold;
 
 }
 
-.dashboard .d-flex.profile .card .card-body .card-text .singleh{
-  font-weight:bold;
 
-}
-.dashboard .d-flex.single .card .card-body .card-text .singlet{
+
+.dashboard .d-flex.single .card .card-body .card-text .singlet,.dashboard .d-flex.profile .card .card-body .card-text .singlet{
   font-weight:normal;
 
 }
 
-.dashboard .d-flex.profile .card .card-body .card-text .singlet{
-  font-weight:normal;
-
+.dashboard .d-flex.profile .card .card-body .card-text a{
+  color:#d87d8c;
 }
+
 
 .dashboard .d-flex.single .card .card-body .card-text.snap img{
   float:left;
-
+width: 50%;
 }
 
 .dashboard .d-flex.single .card .card-body  .info{
   float:right;
-  margin-top:-30%;
-  text-align:center;
+  margin-right: 10%;
+  text-align:justify;
+  color: #d87d8c;
 
+}
+.dashboard .state .btn-group{
+  margin: 8% 0% 0% 2%;
+}
+.dashboard .state .btn-group .active{
+  background-color: #d87d8c;
+}
+
+.dashboard .state .btn-group .btn-outline-primary{
+  border-color:#d87d8c;
+  color:#d87d8c;
+  background-color:white;
+
+}
+.dashboard .new{
+  margin: 0% 0% 0% 2%;
+  color: #d87d8c;
 }
 .add{
   display: flex;
@@ -140,19 +353,34 @@
   justify-content: center;
   margin: 2% 0% -20% 20%;
 }
-
+.dashboard .states .btn{
+  margin: 8% 0% 0% 2%;
+  background-color:#d87d8c;
+}
 .dashboard .new{
   margin-top:2%;
+  display:flex;
+  flex-direction:row;
 }
 .dashboard .new .card.newcard{
-  width:30rem;
-  border:1px solid blue;
+  width:40%;
+  border:1px solid #d87d8c;
 }
 
+.dashboard .new .card-title{
+  font-weight:bolder;
+}
 
+.dashboard .new .card-text{
+  width:100%;
+}
+.dashboard .new .card-text h5{
+  font-weight:bolder;
+
+}
 .dashboard .new  .newcard .accept{
-  width:10rem;
-  background-color:green;
+  width:2%;
+  background-color:#7b9262;
   border:none;
   color:white;
   border-radius:5px;
@@ -162,8 +390,8 @@
 }
 
 .dashboard .new .newcard .decline{
-  width:10rem;
-  background-color:crimson;
+  width:2%;
+  background-color:#DB5461;
   border:none;
   color:white;
   border-radius:5px;
@@ -172,6 +400,7 @@
   padding:2%;
   font-size: 10pt;
 }
+
 
 
 .interface{
@@ -207,4 +436,16 @@
   border-radius:2px;
   margin-left:5%;
   text-align: center;
+}
+
+
+.dashboard .d-flex.live.finance{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+
+}
+
+.dashboard .d-flex.live.finance .card{
+width:100%;
 }

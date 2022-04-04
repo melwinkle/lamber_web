@@ -10,17 +10,22 @@ import {
 import "../../App.css";
 import { getDatabase, ref, set } from "firebase/database";
 import { getAuth, createUserWithEmailAndPassword ,sendEmailVerification} from "firebase/auth";
+import * as logo from '../../images/lamber_logo.png';
 
 export default function Register() {
+  const [info, setInfo] = useState("");
   const [name, setCompany] = useState("");
   const [location, setLocation] = useState("");
   const [phone, setPhone] = useState("");
     const [email, setName] = useState("");
   const [password, setEmail] = useState("");
   const [passwords, setPass] = useState("");
+  const [bank, setFirst] = useState("");
+    const [number, setLast] = useState("");
+    const [names, setMail] = useState("");
   const onChangeHandler = (fieldName, value)=>{
     if(fieldName === "email"){
-      setName(value);
+        setName(value);
     }
     else if(fieldName==="name"){
       setCompany(value);
@@ -37,6 +42,15 @@ export default function Register() {
     else if(fieldName==="passwords"){
         setPass(value);
       }
+    else if(fieldName === "bank"){
+        setFirst(value);
+      }
+    else if(fieldName==="number"){
+        setLast(value);
+      }
+    else if(fieldName==="names"){
+        setMail(value);
+      }
   }
   const auth = getAuth();
   const db = getDatabase();
@@ -45,6 +59,10 @@ export default function Register() {
     e.preventDefault();
    
     try {
+
+      if(name==""||phone==""||location==""||email==""||bank==""||number==""||names==""){
+        setInfo("All fields are required");
+      }
       createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in 
@@ -67,6 +85,9 @@ export default function Register() {
           uid: user.uid,
           Hospital_email: user.email,
           Vehicle:0,
+          Bank_name: bank,
+          Bank_number: number,
+          Account_name:names
         }).then(()=>{
           auth.onAuthStateChanged(user => {
                 if (user) {
@@ -105,10 +126,14 @@ export default function Register() {
 
 
   return (
-    <div class="login">
-        <MDBCard style={{ maxWidth: '40rem' }}>
+    <div class="login register">
+        <MDBCard style={{ maxWidth: '50rem' }}>
+        <div class="logo">
+                  <img src={logo}></img>
+                  </div>
                 <MDBCardBody>
                         <MDBCardTitle>LAMBER MANAGEMENT</MDBCardTitle>
+                        <h4>{info}</h4>
                         <form onSubmit={(e)=>{handleSubmit(e)}}>
                             <MDBInput className='mb-4'  id='form1' type='text' label="Company Name" onChange={(e)=>{ onChangeHandler("name",e.target.value)}} />
                             <MDBInput className='mb-4' id='form2' type='text' label="Company Location"  onChange={(e)=>{ onChangeHandler("location",e.target.value)}}/>
@@ -119,16 +144,11 @@ export default function Register() {
 
                             <MDBInput className='mb-4' type='password' id='form2Example4' label='Password' onChange={(e)=>{ onChangeHandler("password",e.target.value)}}/>
                             <MDBInput className='mb-4' type='password' id='form2Example2' label='Re-enter Password' onChange={(e)=>{ onChangeHandler("passwords",e.target.value)}}/>
-                            <MDBRow className='mb-4'>
-                                <MDBCol className='d-flex justify-content-center'>
-                                <MDBCheckbox id='form2Example3' label='Remember me' defaultChecked />
-                                </MDBCol>
-                                <MDBCol>
-                                <a href='#!'>Forgot password?</a>
-                                </MDBCol>
-                            </MDBRow>
-
-                            <MDBBtn type='submit' className='mb-4' block>
+                           
+                            <MDBInput className='mb-4'  id='form3' type='text' label="Bank Name"  onChange={(e)=>{ onChangeHandler("bank",e.target.value)}} />
+                            <MDBInput className='mb-4' id='form4' type='text' label="Bank Account Number"  onChange={(e)=>{ onChangeHandler("number",e.target.value)}}/>
+                            <MDBInput  className='mb-4' label='Account Name' id='typePhone' type='text'  onChange={(e)=>{ onChangeHandler("names",e.target.value)}} />
+                            <MDBBtn type='submit' className='sub mb-4' block>
                                 Register
                             </MDBBtn>
 
