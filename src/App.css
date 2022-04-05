@@ -2,7 +2,7 @@
 @import url('https://css.gg/software-download.css');
 .App {
   text-align: center;
-  background-color:#ffc3c7;
+  background-color:#ffcad4;
 }
 
 .App-logo {
@@ -41,7 +41,7 @@
 }
 
 body{
-  background-color:#ffc3c7;
+  background-color:#ffcad4;
 }
 
 .login{
@@ -88,12 +88,12 @@ body{
 }
 
 .login .card-title{
-  color:#d87d8c;
+  color:#db5461;
   font-weight:bold;
   margin-bottom: 2%;
 }
 .login h4{
-  color:#d87d8c;
+  color:#db5461;
   margin-bottom: 2%;
   text-align: center;
 }
@@ -104,39 +104,39 @@ body{
 
 
 .login .card .form-outline .form-control,.dashboard .d-flex.add .form-outline .form-control,.dashboard .d-flex.add .form-select,.dashboard .d-flex.profile .form-control{
-  border: 1px solid #d87d8c;
-  color: #d87d8c;
+  border: 1px solid #db5461;
+  color: #db5461;
 }
 .login .form-outline .form-control ~ .form-label,.dashboard .d-flex.add .form-outline .form-control ~ .form-label,.dashboard .d-flex.profile .form-outline .form-control ~ .form-label{
-  color: #d87d8c;
+  color: #db5461;
 }
 
 .login .form-outline .form-control:focus,.dashboard .d-flex.add .form-outline .form-control:focus,.dashboard .d-flex.profile .form-outline .form-control:focus{
-  border-color:#d87d8c;
-  border: 1px solid #d87d8c;
+  border-color:#db5461;
+  border: 1px solid #db5461;
 }
 
 .login #password a{
-  color:#d87d8c;
+  color:#db5461;
   justify-content: right;
   display:flex;
   align-items: center;
 }
 
 .login .sub{
-  background-color:#d87d8c
+  background-color:#db5461
 
 }
 
 .login .sub:hover{
-  background-color:#d87d8c;
+  background-color:#db5461;
 }
 
 .login .text-center{
-  color:#ffc3c7;
+  color:#ffcad4;
 }
 .login .text-center a{
-  color:#d87d8c;
+  color:#db5461;
 }
 
 .dashboard{
@@ -154,18 +154,18 @@ body{
 }
 
 .dashboard .navbar-light .navbar-brand,.dashboard .navbar-light .navbar-nav .nav-link.active{
-  color:#d87d8c;
+  color:#db5461;
 }
 
 .dashboard .nav-tabs .nav-link.active, .nav-tabs .nav-item.show .nav-link{
-  border-color:#d87d8c
+  border-color:#db5461
 }
 .dashboard .navbar-light .navbar-nav .nav-link{
-  color:#ffc3c7;
+  color:#ffcad4;
 }
 
 .dashboard .navbar-light .navbar-text a, .dashboard.navbar-light .navbar-text a:hover, .dashboard .navbar-light .navbar-text a:focus{
-  color:#d87d8c;
+  color:#db5461;
 }
 .dashboard .top .online label{
   margin-left:-2%;
@@ -187,13 +187,13 @@ body{
 }
 .dashboard .d-flex.sum span{
   font-size:25pt;
-  color:#ffc3c7;
+  color:#ffcad4;
  
 }
 .dashboard .d-flex.sum span svg{
   font-size:20pt;
   margin-left:2%;
-  color:#d87d8cda;
+  color:#db5461da;
 }
 
 .dashboard .d-flex.live.dash{
@@ -204,23 +204,23 @@ body{
 }
 
 .dashboard .d-flex.sum .card-title,.dashboard .d-flex.live.dash .card-title, .dashboard .d-flex.live.dash th,.dashboard .d-flex.live th,.dashboard .d-flex.add .card-title{
-  color:#d87d8c;
+  color:#db5461;
   font-weight:bold;
 }
 .dashboard .d-flex.live.dash td,.dashboard .d-flex.live td{
-  color:#d87d8ce9;
+  color:#db5461e9;
   font-weight:bolder;
 }
 .dashboard .d-flex.live{
   margin: 5% 2% 0% 5%;
-  color:#d87d8c;
+  color:#db5461;
 }
 
 .dashboard .d-flex.live .btn-warning{
 background: none;
   margin-right: 5%;
   font-size:5pt;
-  color:#d87d8c;
+  color:#db5461;
   margin-right: 3%;
 
 }
@@ -230,7 +230,7 @@ background: none;
   justify-content: space-around;
 }
 .dashboard .d-flex.single .btn-success{
-  background-color: #d87d8c;
+  background-color: #db5461;
 }
 .dashboard .d-flex.live .table span{
   display:flex;
@@ -247,14 +247,14 @@ background: none;
 }
 
 .dashboard .d-flex.live .btn,.dashboard .d-flex.add .btn ,.dashboard .state .btn{
-  background-color: #d87d8c;
+  background-color: #db5461;
 }
 
 .dashboard .d-flex.live.dash .card,.dashboard .d-flex.add .card{
   width:90%;
 }
 .dashboard .d-flex.live.dash .btn{
-  background-color:#d87d8c;
+  background-color:#db5461;
 }
 .dashboard .d-flex.single{
   margin: 5% 0% 0% 0%;
@@ -269,7 +269,7 @@ background: none;
 .dashboard .d-flex.profile .card {
   margin:8% 0% 0% 2%;
   width: 90%;
-  color: #d87d8c;
+  color: #db5461;
 }
 .dashboard .d-flex.live #rating {
   text-align: center;
@@ -285,12 +285,12 @@ background: none;
   flex-direction: row;
 }
 .dashboard .d-flex.profile .card .btn{
-  background-color:#d87d8ccf;
+  background-color:#db5461cf;
   margin-right:2%;
   margin-top: 2%;
 }
 .dashboard .d-flex.profile .card .btn.active{
-  background-color:#d87d8c;
+  background-color:#db5461;
 }
 .dashboard .d-flex.live #rating
 .dashboard .d-flex.single .card .card-body .card-text{
@@ -321,7 +321,7 @@ background: none;
 }
 
 .dashboard .d-flex.profile .card .card-body .card-text a{
-  color:#d87d8c;
+  color:#db5461;
 }
 
 
@@ -334,25 +334,25 @@ width: 50%;
   float:right;
   margin-right: 10%;
   text-align:justify;
-  color: #d87d8c;
+  color: #db5461;
 
 }
 .dashboard .state .btn-group{
   margin: 8% 0% 0% 2%;
 }
 .dashboard .state .btn-group .active{
-  background-color: #d87d8c;
+  background-color: #db5461;
 }
 
 .dashboard .state .btn-group .btn-outline-primary{
-  border-color:#d87d8c;
-  color:#d87d8c;
+  border-color:#db5461;
+  color:#db5461;
   background-color:white;
 
 }
 .dashboard .new{
   margin: 0% 0% 0% 2%;
-  color: #d87d8c;
+  color: #db5461;
 }
 .add{
   display: flex;
@@ -362,7 +362,7 @@ width: 50%;
 }
 .dashboard .states .btn{
   margin: 8% 0% 0% 2%;
-  background-color:#d87d8c;
+  background-color:#db5461;
 }
 .dashboard .new{
   margin-top:2%;
@@ -371,7 +371,7 @@ width: 50%;
 }
 .dashboard .new .card.newcard{
   width:40%;
-  border:1px solid #d87d8c;
+  border:1px solid #db5461;
 }
 
 .dashboard .new .card-title{
