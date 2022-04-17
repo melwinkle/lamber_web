@@ -195,7 +195,7 @@ export default function AcceptRequests() {
               </Container>
             </Navbar>
 
-            <div class="state">
+            <div class="states">
                 <MDBBtn href="/admin/requests"active>BACK</MDBBtn>
             </div>
 
