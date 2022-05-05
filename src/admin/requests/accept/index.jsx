@@ -22,7 +22,7 @@ export default function AcceptRequests() {
     const[data,setData] = useState({});
     const [ems, setFirst] = useState("");
     const [fname, setLast] = useState("");
-    const [lname, setLastN] = useState("");
+    const [pnum, setLastN] = useState("");
     const [hospital, setName] = useState("");
     const [location, setloc] = useState("");
     const [hid, setID] = useState("");
@@ -89,7 +89,8 @@ export default function AcceptRequests() {
           Hospital_location:location,
           Hospital_uid:hid,
           Vehicle:1,
-          Account:acc
+          Account:acc,
+          Personnel_number:pnum
         }).then(() => {
           console.log("Assigned");
           alert("EMS ASSIGNED")
@@ -111,6 +112,7 @@ export default function AcceptRequests() {
                   
                     if(emp[key].Hospital_uid==uid){
                         setData(emp[key].uid,emp[key].First_name,emp[key].Last_name);
+                        setLastN(emp[key].Number);
                       fileToShow += "<option value='" + emp[key].uid +"' >"+emp[key].First_name+" "+emp[key].Last_name+"</option>" ;
               
                       console.log(emp);
