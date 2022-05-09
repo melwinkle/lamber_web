@@ -81,12 +81,12 @@ useEffect(()=>{
                   "<td scope='row'>" + data[key].Customer_Name +'</td>'+
                   '<td >' + data[key].Destination +'</td>' +
                   '<td >' + data[key].Request_DateTime +'</td>' +
-                  "<td>" + data[key].Charge +"</td>" +
+                  "<td>" + data[key].Amount +"</td>" +
                   "<td>" + data[key].Payment_Status +"</td>" +
 
                   "</tr>";
           
-                  sum+=data[key].Charge;
+                  sum+=data[key].Amount;
 
                   
 
