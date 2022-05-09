@@ -254,7 +254,7 @@ function directionsCallback (response) {
         <div class='dashboard'>
             <Navbar fixed="top" >
               <Container>
-                <Navbar.Brand href="#admin">Lamber EMS</Navbar.Brand>
+                <Navbar.Brand href="#admin">Lamber Admin</Navbar.Brand>
                 <Nav className="me-auto" variant="tabs" defaultActiveKey="/admin/requests">
                     <Nav.Link href="/admin">Home</Nav.Link>
                     <Nav.Link href="/admin/requests">Requests</Nav.Link>
