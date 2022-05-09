@@ -206,8 +206,7 @@ useEffect(()=>{
         {stat=="Completed" &&       
         <div>
           <h6> Trip ended at {trip}</h6> 
-          <h4>Time Spent</h4>
-          <h1>30 minutes</h1> 
+         
           
         </div> 
           
