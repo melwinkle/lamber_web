@@ -264,7 +264,7 @@ function directionsCallback (response) {
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                   <Navbar.Text>
-                      <a href="/ems/profile">{full}</a>
+                      <a href="/admin/profile">{full}</a>
                      <a onClick={()=>logout()} class="logout"> <FiLogOut/></a>
                   </Navbar.Text>
                 </Navbar.Collapse>
