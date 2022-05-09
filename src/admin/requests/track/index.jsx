@@ -189,8 +189,7 @@ useEffect(()=>{
         {stat=="Arrived" &&       
         <div>
           <h6> Arrived at {dest}</h6> 
-          <h4>Time Spent</h4>
-          <h1>04:00</h1> 
+         
         
         </div> 
           
