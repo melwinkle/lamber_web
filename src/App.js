@@ -23,14 +23,7 @@ import AProfileUpdate from "./admin/profile/update";
 import AddBank from './admin/profile/account';
 import Finance from './admin/finance';
 
-import EHome from "./ems";
-import EMSDashboard from "./ems/dashboard";
-import EMSIncomingRequests from "./ems/requests/";
-import EMSGeneralRequests from "./ems/requests/general";
-import EMSSingleRequest from "./ems/requests/single";
-import EMSTrackRequest from "./ems/requests/track";
-import EMSProfile from "./ems/profile";
-import ProfileUpdate from "./ems/profile/update";
+
 
 
 function App(){
@@ -55,14 +48,7 @@ function App(){
         <Route path="/admin/employees/add/" element={<AddEmployee />} />
         <Route path="/admin/finance/" element={<Finance />} />
 
-        <Route path="/ems/" element={<EHome />} />
-        <Route path="/ems/dashboard" element={<EMSDashboard />} />
-        <Route path="/ems/requests/" element={<EMSIncomingRequests />} />
-        <Route path="/ems/requests/general/" element={<EMSGeneralRequests />} />
-        <Route path="/ems/requests/single/:id" element={<EMSSingleRequest />} />
-        <Route path="/ems/requests/track/:id" element={<EMSTrackRequest />} />
-        <Route path="/ems/profile" element={<EMSProfile/>} />
-        <Route path="/ems/profile/update" element={<ProfileUpdate/>} />
+    
       </Routes>
     </BrowserRouter>
   
