@@ -74,7 +74,7 @@ function request_count(uid){
                 "<td>" + data[key].Request_Type +"</td>" +
                 "<td>" + data[key].Reason +"</td>" +
                 "<td>" + data[key].Status +"</td>" +
-                "<td>"+"<a class='btn btn-warning' href='/admin/requests/single/"+key+"'>"+"<i class='gg-eye'></i>"+"</button>"+"</td>" +
+                "<td>"+"<a class='btn-warning' href='/admin/requests/single/"+key+"'>"+"<i class='gg-eye'></i>"+"</button>"+"</td>" +
            
                 "</tr>";
 
